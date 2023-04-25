@@ -1,0 +1,13 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary-color: #fff;
+  --secondary-color: #810f05;
+  --accent-color: #255f85;
+  /* 669bbc */
+  /* 003049 */
+}
