@@ -1,26 +1,29 @@
 import React from "react";
-import "./NotFound.css";
 import { useNavigate } from "react-router-dom";
 import MainButton from "../../components/button/button";
 
-const NotFound = () => {
+const Unauthorized = () => {
   const navigate = useNavigate();
 
   const handleButtonClick = () => {
     // Programmatically navigate to the About page
-    navigate("/");
+    navigate("/admin-login");
   };
   return (
     <div className="not-found">
       <div className="not-found-page-container">
-        <h1 className="not-found-heading">Oops!</h1>
-        <p className="e404">404 - page not found</p>
+        <h1 className="unauthorized-heading">Unauthorized</h1>
+        <p className="unauthorized-e">
+          401 - You don't have access to this page
+        </p>
         <p style={{ width: "400px", textAlign: "center", marginTop: "20px" }}>
-          The page you are looking for might have removed had its name changed
-          or is temporarily unavailable.
+          This page is not publicly available.
+        </p>
+        <p style={{ width: "400px", textAlign: "center", marginTop: "20px" }}>
+          To access it please login first
         </p>
         <MainButton
-          name="GO TO HOMEPAGE"
+          name="Login"
           style={{ marginTop: "20px" }}
           onClick={handleButtonClick}
         />
@@ -29,4 +32,4 @@ const NotFound = () => {
   );
 };
 
-export default NotFound;
+export default Unauthorized;

@@ -3,13 +3,19 @@ import "./text-field.css";
 
 function TextField(props) {
   return (
-    <input
-      className="global-text-field"
-      type={props.type}
-      placeholder={props.placeholder}
-      required={props.required}
-      style={props.style}
-    />
+    <label htmlFor={props.for}>
+      {props.label}
+      <input
+        className="global-text-field"
+        type={props.type}
+        placeholder={props.placeholder}
+        required
+        style={props.style}
+        onChange={props.onChange}
+        name={props.name}
+        id={props.id}
+      />
+    </label>
   );
 }
 
