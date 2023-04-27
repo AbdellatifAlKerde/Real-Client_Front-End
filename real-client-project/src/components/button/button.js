@@ -9,6 +9,7 @@ function MainButton(props) {
       type={props.type}
       style={props.style}
       onClick={props.onClick}
+      disabled={props.disabled}
     >
       {props.name}
     </button>
