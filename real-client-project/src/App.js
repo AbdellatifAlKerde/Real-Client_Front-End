@@ -26,6 +26,8 @@ function App() {
           <Route path="user-login" element={<UserLoginPage />} />
           <Route path="user-signup" element={<UserSignupPage />} />
           <Route path="home-page" element={<HomePage />} />
+          <Route path="products" element={<ProductsPage />} />
+          <Route path="training" element={<TrainingPage />} />
           <Route path="contact" element={<ContactUsPage />} />
           <Route path="*" element={<NotFound />} />
           <Route path="unauthorized" element={<Unauthorized />} />
