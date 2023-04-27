@@ -6,7 +6,8 @@ import UserLoginPage from "./pages/UserLogin/UserLogin.js";
 import UserSignupPage from "./pages/UserSignup/UserSignup.js";
 import HomePage from "./pages/Home/Home.js";
 import ContactUsPage from "./pages/ContactUs/ContactUs.js";
-import Products from "./pages/Products/Products.js";
+import ProductsPage from "./pages/Products/Products.js";
+import TrainingPage from "./pages/Training/Training.js";
 import DashboardPage from "./pages/Dashboard/Dashboard.js";
 import NotFound from "./pages/NotFound/NotFound.js";
 
@@ -22,7 +23,8 @@ function App() {
             <Route path="user-signup" element={<UserSignupPage />} />
             <Route path="home-page" element={<HomePage />} />
             <Route path="contact" element={<ContactUsPage />} />
-            <Route path="products" element={<Products />} />
+            <Route path="products" element={<ProductsPage />} />
+            <Route path="training" element={<TrainingPage />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
