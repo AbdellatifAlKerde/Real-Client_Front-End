@@ -10,6 +10,7 @@ import ProductsPage from "./pages/Products/Products.js";
 import TrainingPage from "./pages/Training/Training.js";
 import DashboardPage from "./pages/Dashboard/Dashboard.js";
 import NotFound from "./pages/NotFound/NotFound.js";
+import Footer from "./components/footer/footer";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
+        <Footer />
     </div>
   );
 }
