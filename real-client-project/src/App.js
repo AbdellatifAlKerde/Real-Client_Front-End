@@ -14,7 +14,6 @@ import Header from "../src/components/header/header"
 function App() {
   return (
     <div className="App">
-      <Header/>
         <Routes>
           <Route>
             <Route exact path="/" element={<HomePage />} />

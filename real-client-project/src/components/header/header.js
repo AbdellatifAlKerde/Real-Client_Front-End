@@ -53,10 +53,8 @@ const HeaderPage = () =>  {
           </NavLink>
         </li>
       </ul>
-      <div className="center-space"></div>
-      <div className="cart">
-        <FaShoppingCart />
-      </div>
+      <div className="center-space"></div>  
+        <FaShoppingCart className='cart' />
       {!open ? (
         <div className="toggle_btn">
           <FaAlignJustify onClick={handelMenuShow} />
