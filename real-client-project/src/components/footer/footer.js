@@ -102,14 +102,19 @@ const Footer = () => {
               <span>Address</span>
             </li>
             <li>
-              <FaEnvelope />
-              <a href="rawankrayyem97@gmail.com">rawankrayyem97@gmail.com</a>
+              <a
+                href="mailto:rawankrayyem97@gmail.com"
+                className="contact-link"
+              >
+                <FaEnvelope />
+                <span>rawankrayyem97@gmail.com</span>
+              </a>
             </li>
             <li>
-              <FaPhone />
-              <span>
-                <a href="tel:+70664460">70664460</a>
-              </span>
+              <a href="tel:+70664460" className="contact-link">
+                <FaPhone />
+                <span>70664460</span>
+              </a>
             </li>
           </ul>
         </div>

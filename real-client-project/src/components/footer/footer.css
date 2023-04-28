@@ -28,7 +28,7 @@
 
 .footer-logo {
   flex: 1;
-  margin-right: 2rem;
+  margin-right: 7rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -36,7 +36,7 @@
 
 .footer-logo img {
   width: 200px;
-  margin-top: -90px;
+  margin-top: -59px;
   margin-bottom: -30px;
 }
 
@@ -119,6 +119,7 @@
 .footer-social-media li svg {
   width: 2rem;
   height: 2rem;
+  color: var(--secondary-color);
 }
 
 .footer-social-media a {
@@ -153,14 +154,20 @@
 }
 
 .footer-contact span {
+  display: flex;
+  align-items: center;
   margin-left: 1rem;
 }
 
 .footer-contact svg {
-  color: var(--accent-color);
-  width: 1.5rem;
-  height: 1.5rem;
+  color: var(--secondary-color);
+  width: 2rem;
+  height: 2rem;
   margin-right: 1rem;
+}
+
+.footer-contact svg:hover {
+  color: var(--accent-color);
 }
 
 .footer-contact a {
@@ -170,6 +177,23 @@
 }
 
 .footer-contact a:hover {
+  color: var(--accent-color);
+}
+
+.contact-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: var(--secondary-color);
+}
+
+.contact-link svg {
+  width: 2rem;
+  height: 2rem;
+  margin-right: 1rem;
+}
+
+.contact-link:hover {
   color: var(--accent-color);
 }
 
@@ -184,11 +208,15 @@
   color: var(--secondary-color);
 }
 
+.footer-copyright p {
+  margin-bottom: 20px;
+}
+
 /* Small screens */
 @media screen and (max-width: 767px) {
   .footer {
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     padding: 3rem;
   }
 
@@ -308,7 +336,7 @@
 
   .footer-main {
     flex-direction: row;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
     margin-bottom: 0;
   }
@@ -318,7 +346,7 @@
   }
 
   .footer-logo {
-    margin-right: 2rem;
+    margin-right: 7rem;
   }
 
   .footer-links {
