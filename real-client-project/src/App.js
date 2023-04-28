@@ -10,10 +10,11 @@ import ProductsPage from "./pages/Products/Products.js";
 import TrainingPage from "./pages/Training/Training.js";
 import DashboardPage from "./pages/Dashboard/Dashboard.js";
 import NotFound from "./pages/NotFound/NotFound.js";
-
+import Header from "../src/components/header/header"
 function App() {
   return (
     <div className="App">
+      <Header/>
         <Routes>
           <Route>
             <Route exact path="/" element={<HomePage />} />
