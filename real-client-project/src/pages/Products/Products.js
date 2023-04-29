@@ -1,8 +1,10 @@
+
 import {React , useEffect , useState } from 'react';
 import axios from "axios"
 import Card from "./Card/Card"
 import {FaChevronRight} from "react-icons/fa"
 import "./Products.css"
+
 const Products = () => {
   const [products , setProducts] = useState([]);
   const [numberPages , setNumberPages] = useState([]);

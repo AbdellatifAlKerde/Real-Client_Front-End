@@ -1,6 +1,6 @@
 import "./App.css";
 import React from "react";
-import { BrowserRouter, Route, Routes, Router } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import AdminLoginPage from "./pages/AdminLogin/AdminLogin.js";
 import UserLoginPage from "./pages/UserLogin/UserLogin.js";
 import UserSignupPage from "./pages/UserSignup/UserSignup.js";
@@ -10,6 +10,7 @@ import ProductsPage from "./pages/Products/Products.js";
 import TrainingPage from "./pages/Training/Training.js";
 import DashboardPage from "./pages/Dashboard/Dashboard.js";
 import NotFound from "./pages/NotFound/NotFound.js";
+
 import PrivateRoutes from "./utils/privateRoutes";
 import Unauthorized from "./pages/Unauthorized/Unauthorized";
 
