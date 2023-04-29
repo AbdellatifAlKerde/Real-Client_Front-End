@@ -47,10 +47,10 @@
     height: 2rem;
 }
 
-image{
+/* image{
     width: 200px;
     height: 2000px;
-}
+} */
 
 .add-button:hover{
     cursor: pointer;

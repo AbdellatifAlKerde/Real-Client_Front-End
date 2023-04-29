@@ -11,6 +11,42 @@
 
 }
 
+.paggination{
+    padding-top: 1rem;
+    height: 5vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    align-items: center;
+    /* border: 1px solid red; */
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+}
+
+.next-button{
+    color: rgb(158, 62, 62);
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.next-button:hover{
+    cursor: pointer;
+}
+.number-page{
+margin-left: .5rem;
+margin-right: .5rem;
+padding: 10px;
+padding-left: 15px;
+padding-right: 15px;
+border-radius: 35px;
+background-color:rgb(158, 62, 62) ;
+color: #fef1ce;
+}
+
+.number-page:hover{
+    cursor: pointer;
+}
+
 @media(max-width : 992px){
     
 
