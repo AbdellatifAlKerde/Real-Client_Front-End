@@ -212,6 +212,28 @@
   margin-bottom: 20px;
 }
 
+.right-space-footer{
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-image: url("../../images/footer-design.png");
+    background-size: contain  ;
+    width: 10%;
+    height: 100%;
+}
+
+.left-space-footer{
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-image: url("../../images/footer-design.png") ;
+    /* border-image-repeat: repeat; */
+    background-size: contain;
+    width: 10%;
+    height: 100%;
+    
+}
+
 /* Small screens */
 @media screen and (max-width: 767px) {
   .footer {

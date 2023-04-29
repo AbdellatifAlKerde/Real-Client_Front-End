@@ -3,7 +3,7 @@
 .wrapp{
     background-color: #fef1ce;
     height: 10vh    ;
-    border-bottom: 2px solid rgb(109, 18, 18);
+    /* border-bottom: 2px solid rgb(109, 18, 18); */
     display: flex;
     align-items: center;
     justify-content: space-around;

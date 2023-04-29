@@ -14,6 +14,9 @@ import {
 const Footer = () => {
   return (
     <footer className="footer">
+      <div className="right-space-footer">
+
+      </div>
       <div className="footer-main">
         <div className="footer-logo">
           <img src={RMZNA} alt="Logo" />
@@ -126,6 +129,7 @@ const Footer = () => {
           reserved.
         </p>
       </div>
+      <div className="left-space-footer"></div>
     </footer>
   );
 };
