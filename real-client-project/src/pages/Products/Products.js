@@ -7,7 +7,7 @@ const Products = () => {
 
     useEffect( () => {
       axios
-        .get(`http://localhost:6010/api/product`)
+        .get(`http://localhost:5010/api/product`)
         .then((response) => {
           if (response.status === 200) {
             setProducts(response.data.items)
@@ -21,17 +21,19 @@ const Products = () => {
 
   return (
     <div className="product-container">
-      <div className='search'>
-        
+      <div className="search"></div>
+      <div className="products">
+        {products.map((element) => (
+          <Card
+            image={`${process.env.REACT_APP_API_URL}${element.image}`}
+            price={element.price}
+            name={element.name}
+            description={element.description}
+            category={element.category.name}
+          />
+        ))}
       </div>
-      <div className='products'>
-                {products.map((element)=>(
-                    <Card image={`${process.env.REACT_APP_IMAGESURL}${element.image}`} price={element.price}  name={element.name} description={element.description} category={element.category.name} />
-                    ))}
-      </div>
-      <div className='paggination'>
-
-      </div>
+      <div className="paggination"></div>
     </div>
   );
 }
