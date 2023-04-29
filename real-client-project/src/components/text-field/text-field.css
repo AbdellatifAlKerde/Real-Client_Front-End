@@ -7,5 +7,5 @@
 }
 
 .global-text-field:focus {
-  outline: 2px solid var(--accent-color);
+  outline: 2px solid var(--secondary-color);
 }

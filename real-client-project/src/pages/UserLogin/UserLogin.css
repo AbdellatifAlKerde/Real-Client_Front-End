@@ -39,16 +39,16 @@
 }
 
 .user-login-page-form {
-  /* background-color: #; */
   width: 45%;
   display: flex;
   flex-direction: column;
-  padding: 80px;
+  padding: 20px 80px;
 }
 
 .user-login-page-title {
   font-size: 2.5rem;
   margin-bottom: 60px;
+  color: var(--secondary-color);
 }
 
 .user-login-page-inputs {
@@ -75,7 +75,6 @@
   width: 80px;
   height: 80px;
   margin-bottom: 20px;
-  /* border-radius: 20px; */
   overflow: hidden;
 }
 
@@ -96,4 +95,15 @@
   .user-login-page-container {
     width: 90%;
   }
+}
+
+@media (max-width: 480px) {
+  .user-login-page-form {
+    padding: 60px 30px;
+  }
+}
+
+.user-login-page-address-phone {
+  display: flex;
+  gap: 10px;
 }
