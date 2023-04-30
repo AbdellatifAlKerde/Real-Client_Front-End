@@ -3,6 +3,8 @@ import {React , useEffect , useState } from 'react';
 import axios from "axios"
 import Card from "./Card/Card"
 import {FaChevronRight} from "react-icons/fa"
+import Header from "../../components/header/header";
+import Footer from "../../components/footer/footer";
 import "./Products.css"
 
 const Products = () => {
@@ -10,6 +12,7 @@ const Products = () => {
   const [numberPages , setNumberPages] = useState([]);
   const [page , setPage] =useState(1) ;
   const [totalPages , setTotalPages] = useState(1);
+  const [byeProducts , setbyeProducts] = useState([]);
   
   const countNUmberPages = (element) => {
     const e = parseInt(element);
@@ -51,7 +54,10 @@ const handelPlus = () => {
 }
 
 return (
-  <div className="product-container">
+  <div className='hool-product-page'>
+     <Header className="fixed" />
+  <div className="product-container"> 
+
       <div className="search"></div>
       <div className="products">
         {products.map((element) => (
@@ -71,6 +77,8 @@ return (
         ))}
         {!(totalPages === page) ?<FaChevronRight className='next-button' onClick={() => {handelPlus(page)}} />:null}
       </div>
+    </div>
+      <Footer />
     </div>
   );
 }

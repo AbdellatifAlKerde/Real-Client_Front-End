@@ -1,6 +1,12 @@
 
-
+.holl-header {
+    top: 0;
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+}
 .wrapp{
+    top: 0;
     background-color: #fef1ce;
     height: 10vh    ;
     /* border-bottom: 2px solid rgb(109, 18, 18); */

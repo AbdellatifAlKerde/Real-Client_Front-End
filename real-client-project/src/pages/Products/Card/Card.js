@@ -1,16 +1,19 @@
-import React from 'react'
+import {React , useState} from 'react'
 import "./Card.css"
 import { FaCartPlus } from "react-icons/fa";
 
 const Card = (props) => {
+const [addProduct , setAddProduct] = useState([]);
 
-
-
+const handelAddProduct = (element) => {
+  setAddProduct(...addProduct ,element)
+}
+// console.log(addProduct)
   return (
     <div className="container">
       <div className="header-card">
         <img src={props.image} alt="product-card" />
-        <FaCartPlus className="add-button" />
+        <FaCartPlus className="add-button" onClick={() => {handelAddProduct(props.key)}} />
       </div>
       <div className="body-card">
         <div className="info-card">
