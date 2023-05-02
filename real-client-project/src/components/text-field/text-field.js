@@ -14,6 +14,8 @@ function TextField(props) {
         onChange={props.onChange}
         name={props.name}
         id={props.id}
+        autoFocus={props.autoFocus}
+        value={props.value}
       />
     </label>
   );

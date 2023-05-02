@@ -12,8 +12,10 @@ body {
 
 :root {
   --primary-color: #fff;
-  --secondary-color: #810f05;
-  --accent-color: #255f85;
+  --secondary-color: #fef1ce;
+  --accent-color: #810f05;
+
+  --color: #4b100c;
 
   /* 669bbc */
   /* 003049 */

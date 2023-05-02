@@ -20,7 +20,7 @@ const Unauthorized = () => {
           This page is not publicly available.
         </p>
         <p style={{ width: "400px", textAlign: "center", marginTop: "20px" }}>
-          To access it please login first
+          To access it please login first.
         </p>
         <MainButton
           name="Login"

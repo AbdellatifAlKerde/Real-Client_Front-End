@@ -56,6 +56,13 @@
   width: 100%;
 }
 
+.admin-login-page-button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 @media (max-width: 1200px) {
   .admin-login-container {
     width: 400px;
