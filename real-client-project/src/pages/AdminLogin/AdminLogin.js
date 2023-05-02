@@ -5,12 +5,17 @@ import MainButton from "../../components/button/button";
 import logo from "../../images/RMZNA-logo.jpg";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Spinner from "../../components/spinner/spinner";
 
 function AdminLoginPage() {
   const navigate = useNavigate();
   const [login, setLogin] = useState({
     email: "",
     password: "",
+  });
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState({
+    error: "",
   });
 
   const handleLoginChange = (event) => {
@@ -23,15 +28,21 @@ function AdminLoginPage() {
       email: login.email,
       password: login.password,
     };
+
+    setErrorMessage({ error: "" });
+    setIsLoading(true);
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_API_URL}/api/admin/login`,
         loginData
       );
 
+      setIsLoading(false);
+
       if (response.status == 200) {
-        console.log(response.data.token);
         localStorage.setItem("admin-token", response.data.token);
+        localStorage.setItem("admin-full-name", response.data.fullName);
+        localStorage.setItem("admin-email", response.data.email);
 
         navigate("/dashboard");
       } else {
@@ -39,6 +50,8 @@ function AdminLoginPage() {
       }
     } catch (e) {
       console.log(e);
+      setErrorMessage({ error: "Email or password is invalid" });
+      setIsLoading(false);
     }
   };
 
@@ -56,6 +69,9 @@ function AdminLoginPage() {
         </div>
         <h2>Login</h2>
         <div className="admin-login-form">
+          <div style={{ color: "var(--accent-color)", textAlign: "center" }}>
+            {errorMessage.error}
+          </div>
           <div>
             <TextField
               type="email"
@@ -76,7 +92,7 @@ function AdminLoginPage() {
               onChange={handleLoginChange}
             />
           </div>
-          <div>
+          <div className="admin-login-page-button">
             <MainButton
               name="Login"
               style={{ width: "100%", padding: "15px 0" }}
@@ -85,6 +101,11 @@ function AdminLoginPage() {
                 Login();
               }}
             />
+            {isLoading && (
+              <Spinner
+                style={{ width: "20px", height: "20px", marginTop: "10px" }}
+              />
+            )}
           </div>
         </div>
       </div>
