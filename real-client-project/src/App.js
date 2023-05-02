@@ -9,9 +9,12 @@ import HomePage from "./pages/Home/Home.js";
 import DashboardPage from "./pages/Dashboard/Dashboard.js";
 import NotFound from "./pages/NotFound/NotFound.js";
 
+
 function App() {
+  
   return (
     <div className="App">
+      
         <Routes>
           <Route>
             <Route exact path="/" element={<HomePage />} />
