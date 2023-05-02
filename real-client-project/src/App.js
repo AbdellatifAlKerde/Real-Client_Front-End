@@ -9,6 +9,7 @@ import ProductsPage from "./pages/Products/Products.js";
 import TrainingPage from "./pages/Training/Training.js";
 import DashboardPage from "./pages/Dashboard/Dashboard.js";
 import NotFound from "./pages/NotFound/NotFound.js";
+
 import PrivateRoutes from "./utils/privateRoutes";
 import Unauthorized from "./pages/Unauthorized/Unauthorized";
 import DashboardHome from "./pages/DashboardHome/DashboardHome.js";
