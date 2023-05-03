@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { IconButton } from "@mui/material";
-import "./DashboardAdmins.css";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import axios from "axios";
@@ -10,29 +9,27 @@ import MainButton from "../../components/button/button";
 import Swal from "sweetalert2";
 import DashboardHeroSection from "../../components/DashboardHeroSection/DashboardHeroSection";
 import DashboardPopUp from "../../components/DashboardPopUp/DashboardPopUp";
-
-function DashboardAdmins() {
+import Spinner from "../../components/spinner/spinner.js";
+function DashboardCategories() {
   const [data, setData] = useState([]);
   const [totalItems, setTotalItems] = useState(0);
   const [page, setPage] = useState(0);
-  const [perPage, setPerPage] = useState(10);
+  const [perPage, setPerPage] = useState(25);
   const [isLoading, setIsLoading] = useState(false);
-  const [adminAddData, setAdminAddData] = useState({
-    fullName: "",
-    email: "",
-    password: "",
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [categoryAddData, setCategoryAddData] = useState({
+    name: "",
   });
 
-  const [adminEditData, setAdminEditData] = useState({
-    fullName: "",
-    email: "",
-    password: "",
+  const [categoryEditData, setCategoryEditData] = useState({
+    name: "",
   });
   const [isEdit, setIsEdit] = useState(false);
 
   const [error, setError] = useState("");
   const [editId, setEditId] = useState(null);
   const [openPopup, setOpenPopup] = useState(false);
+  // const [categories, setCategories] = useState([]);
 
   const triggerEdit = () => {
     setIsEdit(true);
@@ -43,9 +40,9 @@ function DashboardAdmins() {
   };
 
   const columns = [
-    { field: "_id", headerName: "ID", width: 420 },
-    { field: "fullName", headerName: "Full name", width: 260 },
-    { field: "email", headerName: "Email", width: 400 },
+    { field: "_id", headerName: "ID", width: 220 },
+
+    { field: "name", headerName: "Name", width: 200 },
     {
       field: "actions",
       headerName: "Actions",
@@ -56,7 +53,7 @@ function DashboardAdmins() {
           <IconButton
             color="secondary"
             aria-label="delete"
-            onClick={() => deleteAdmin(params.id)}
+            onClick={() => deleteCategory(params.id)}
           >
             <DeleteIcon style={{ color: "var(--accent-color)" }} />
           </IconButton>
@@ -76,14 +73,13 @@ function DashboardAdmins() {
     },
   ];
 
-  const getAdmins = async () => {
+  const getCategories = async () => {
     setIsLoading(true);
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/admin?page=${page}&limit=${perPage}`
+        `${process.env.REACT_APP_API_URL}/api/category`
       );
-      setData(response.data.items);
-      setTotalItems(response.data.totalItems);
+      setData(response.data);
       setIsLoading(false);
     } catch (e) {
       console.log(e);
@@ -92,93 +88,88 @@ function DashboardAdmins() {
   };
 
   useEffect(() => {
-    getAdmins();
-  }, [page, perPage]);
+    getCategories();
+  }, []);
 
   const handleFormChange = (event) => {
     const value = event.target.value;
-    setAdminAddData({ ...adminAddData, [event.target.name]: value });
+    setCategoryAddData({ ...categoryAddData, [event.target.name]: value });
   };
 
   const handleEditChange = (event) => {
     const value = event.target.value;
-    setAdminEditData({ ...adminEditData, [event.target.name]: value });
-    console.log(adminEditData);
+    setCategoryEditData({ ...categoryEditData, [event.target.name]: value });
   };
 
-  const addAdmin = async (e) => {
+  const addCategory = async (e) => {
     e.preventDefault();
-    const adminAddForm = {
-      full_name: adminAddData.fullName,
-      email: adminAddData.email,
-      password: adminAddData.password,
+    setIsSubmitting(true);
+    const categoryAddForm = {
+      name: categoryAddData.name,
     };
+
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/api/admin/register`,
-        adminAddForm
+        `${process.env.REACT_APP_API_URL}/api/category`,
+        categoryAddForm
       );
 
-      console.log(response);
+      setIsSubmitting(false);
       setOpenPopup(false);
       Swal.fire({
         position: "top-end",
         icon: "success",
-        title: "Admin Added Successfully",
+        title: "Category Added Successfully",
         showConfirmButton: false,
         timer: 1500,
       });
-      setAdminAddData({
-        fullName: "",
-        email: "",
-        password: "",
+      setCategoryAddData({
+        name: "",
       });
       setError(response.data.message);
-      getAdmins();
+      getCategories();
     } catch (e) {
       console.log(e);
       setError(e.response.data);
+      setIsSubmitting(false);
     }
   };
 
-  const editAdmin = async (e) => {
+  const editCategory = async (e) => {
     e.preventDefault();
-
-    const adminEditForm = {
-      fullName: adminEditData.fullName,
-      email: adminEditData.email,
-      password: adminEditData.password,
+    setIsSubmitting(true);
+    const categoryEditForm = {
+      name: categoryEditData.name,
     };
 
     try {
       const response = await axios.put(
-        `${process.env.REACT_APP_API_URL}/api/admin/${editId}`,
-        adminEditForm
+        `${process.env.REACT_APP_API_URL}/api/category/${editId}`,
+        categoryEditForm
       );
 
-      console.log(response);
+      setIsSubmitting(false);
       setOpenPopup(false);
       Swal.fire({
         position: "top-end",
         icon: "success",
-        title: "Admin Updated Successfully",
+        title: "Category Updated Successfully",
         showConfirmButton: false,
         timer: 1500,
       });
-      setAdminEditData({
-        fullName: "",
-        email: "",
-        password: "",
+      setCategoryEditData({
+        name: "",
       });
       setError(response.data.message);
-      getAdmins();
+      getCategories();
     } catch (e) {
       console.log(e);
       setError(e.response.data);
+      setIsSubmitting(false);
     }
   };
 
-  const deleteAdmin = async (id) => {
+  const deleteCategory = async (id) => {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -191,21 +182,21 @@ function DashboardAdmins() {
       if (result.isConfirmed) {
         try {
           await axios
-            .delete(`${process.env.REACT_APP_API_URL}/api/admin/${id}`)
+            .delete(`${process.env.REACT_APP_API_URL}/api/category/${id}`)
             .then((response) => {
-              console.log(response.data);
-              getAdmins();
+              getCategories();
             });
         } catch (error) {
           console.log(error);
         }
-        Swal.fire("Deleted!", "Your admin has been deleted.", "success");
+        Swal.fire("Deleted!", "Your category has been deleted.", "success");
       }
     });
   };
 
   const handlePageChange = (params) => {
     setPage(params.page);
+    console.log(page);
   };
 
   const handlePageSizeChange = (params) => {
@@ -214,10 +205,10 @@ function DashboardAdmins() {
 
   return (
     <div className="dashboard-admins onLoad">
-      <DashboardHeroSection title="Admins" />
+      <DashboardHeroSection title="Categories" />
       {openPopup && (
         <DashboardPopUp
-          title={isEdit ? "Edit Admin" : "Add Admin"}
+          title={isEdit ? "Edit Category" : "Add Category"}
           onClick={
             isEdit
               ? () => {
@@ -228,46 +219,37 @@ function DashboardAdmins() {
                   setOpenPopup(false);
                 }
           }
-          onSubmit={isEdit ? editAdmin : addAdmin}
+          onSubmit={isEdit ? editCategory : addCategory}
         >
           <div style={{ color: "var(--accent-color)" }}>{error}</div>
           <div>
             <TextField
-              label="Full Name"
+              label="Name"
               type="text"
               style={{ width: "100%", fontSize: "1rem" }}
-              name="fullName"
-              autoFocus={isEdit ? true : false}
+              name="name"
+              autoFocus={true}
               onChange={isEdit ? handleEditChange : handleFormChange}
-              value={isEdit ? adminEditData.fullName : adminAddData.fullName}
+              value={isEdit ? categoryEditData.name : categoryAddData.name}
             />
           </div>
-          <div>
-            <TextField
-              label="Email"
-              type="email"
-              style={{ width: "100%", fontSize: "1rem" }}
-              name="email"
-              onChange={isEdit ? handleEditChange : handleFormChange}
-              value={isEdit ? adminEditData.email : adminAddData.email}
-            />
-          </div>
-          <div>
-            <TextField
-              label="Password"
-              type="password"
-              style={{ width: "100%", fontSize: "1rem" }}
-              name="password"
-              onChange={isEdit ? handleEditChange : handleFormChange}
-              value={isEdit ? adminEditData.password : adminAddData.password}
-            />
-          </div>
-          <div>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              flexDirection: "column",
+            }}
+          >
             <MainButton
               name={isEdit ? "Edit" : "Add"}
               style={{ width: "100%", padding: "1rem 0" }}
               type="submit"
             />
+            {isSubmitting && (
+              <Spinner
+                style={{ width: "20px", height: "20px", marginTop: "10px" }}
+              />
+            )}
           </div>
         </DashboardPopUp>
       )}
@@ -277,20 +259,23 @@ function DashboardAdmins() {
       >
         <div className="dashboard-admin-add-button">
           <MainButton
-            name="Add Admin"
+            name="Add Category"
             style={{ padding: "1rem 2rem" }}
-            onClick={() => setOpenPopup(true)}
+            onClick={() => {
+              setOpenPopup(true);
+            }}
           />
         </div>
         <DataGrid
+          sx={{ width: "100%" }}
           rows={data}
           columns={columns}
           getRowId={getRowId}
-          pagination
-          pageSize={perPage}
-          rowCount={totalItems}
-          onPageChange={handlePageChange}
-          onPageSizeChange={handlePageSizeChange}
+          // pagination
+          // pageSize={perPage}
+          // rowCount={totalItems}
+          // onPageChange={handlePageChange}
+          // onPageSizeChange={handlePageSizeChange}
           rowSelection={false}
           loading={isLoading}
         />
@@ -299,4 +284,4 @@ function DashboardAdmins() {
   );
 }
 
-export default DashboardAdmins;
+export default DashboardCategories;
