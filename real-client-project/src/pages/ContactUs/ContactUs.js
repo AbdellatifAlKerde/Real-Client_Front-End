@@ -111,13 +111,15 @@ const ContactUs = () => {
                 />
               </div>
             </fieldset>
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="contact-us-page-submit-button"
-            >
-              {isSubmitting ? "Sending..." : "Send"}
-            </button>
+            <div className="contact-us-form-submit-btn">
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="contact-us-page-submit-button"
+              >
+                {isSubmitting ? "Sending..." : "Send"}
+              </button>
+            </div>
           </form>
         </div>
         <div className="get-in-touch">
