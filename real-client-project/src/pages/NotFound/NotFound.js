@@ -8,7 +8,7 @@ const NotFound = () => {
 
   const handleButtonClick = () => {
     // Programmatically navigate to the About page
-    navigate("/");
+    navigate(-1);
   };
   return (
     <div className="not-found">
@@ -20,7 +20,7 @@ const NotFound = () => {
           or is temporarily unavailable.
         </p>
         <MainButton
-          name="GO TO HOMEPAGE"
+          name="GO BACK"
           style={{ marginTop: "20px" }}
           onClick={handleButtonClick}
         />

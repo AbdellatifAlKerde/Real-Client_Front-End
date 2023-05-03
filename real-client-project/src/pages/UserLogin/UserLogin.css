@@ -48,7 +48,7 @@
 .user-login-page-title {
   font-size: 2.5rem;
   margin-bottom: 60px;
-  color: var(--secondary-color);
+  color: var(--accent-color);
 }
 
 .user-login-page-inputs {
@@ -68,7 +68,7 @@
 }
 
 .user-login-page-signup-nav:hover {
-  color: rgb(82, 82, 252);
+  color: var(--accent-color);
 }
 
 .user-login-page-logo {
@@ -76,6 +76,11 @@
   height: 80px;
   margin-bottom: 20px;
   overflow: hidden;
+}
+
+.user-login-page-buttons {
+  display: flex;
+  align-items: center;
 }
 
 @media (max-width: 1200px) {

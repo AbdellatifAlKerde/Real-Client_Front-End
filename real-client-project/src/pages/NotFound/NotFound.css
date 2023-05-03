@@ -38,6 +38,8 @@
 
 .unauthorized-e {
   font-size: 2rem;
+  text-transform: uppercase;
+  font-weight: bold;
 }
 
 @media (max-width: 1200px) {
