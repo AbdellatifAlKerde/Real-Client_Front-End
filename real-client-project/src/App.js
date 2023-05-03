@@ -10,9 +10,10 @@ import ProductsPage from "./pages/Products/Products.js";
 import TrainingPage from "./pages/Training/Training.js";
 import DashboardPage from "./pages/Dashboard/Dashboard.js";
 import NotFound from "./pages/NotFound/NotFound.js";
-
 import PrivateRoutes from "./utils/privateRoutes";
 import Unauthorized from "./pages/Unauthorized/Unauthorized";
+import ShowProduct from "./pages/Products/ShowProduct/ShowProduct";
+import Order from "../src/pages/Products/Order/Order"
 
 function App() {
   return (
@@ -22,12 +23,15 @@ function App() {
           <Route element={<PrivateRoutes />}>
             <Route path="dashboard" element={<DashboardPage />} />
           </Route>
+          <Route exact path="/order" element={<Order />} />
+          <Route exact path="/show-product" element={<HomePage />} />
           <Route exact path="/" element={<HomePage />} />
           <Route path="admin-login" element={<AdminLoginPage />} />
           <Route path="user-login" element={<UserLoginPage />} />
           <Route path="user-signup" element={<UserSignupPage />} />
           <Route path="home-page" element={<HomePage />} />
           <Route path="products" element={<ProductsPage />} />
+          <Route path="products/show-products" element={<ShowProduct />} />
           <Route path="training" element={<TrainingPage />} />
           <Route path="contact" element={<ContactUsPage />} />
           <Route path="*" element={<NotFound />} />

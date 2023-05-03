@@ -1,4 +1,4 @@
-import {React , useState } from 'react';
+import {React , useState , useEffect} from 'react';
 import logo from "../../images/logo-for-web.png";
 import { NavLink} from "react-router-dom";
 import {
@@ -9,17 +9,27 @@ import {
 } from "react-icons/fa";
 import "../header/header.css";
 
-const HeaderPage = () =>  {
-   const [open , setOpen] = useState(false)
- 
+const HeaderPage = (props) =>  {
+   const [open , setOpen] = useState(false);
+   const [findProducts , setFindProducts] = useState(false);
+   const [productsAdded , setProductsAdded] = useState([]);
 
+useEffect(() => {
+  setProductsAdded([localStorage.products]);
+},[])
+
+
+useEffect(() => {
+    if( localStorage.products){
+     setFindProducts(true)
+    }
+    
+})
     const handelMenuShow = () => {
-        console.log("hassan")
         setOpen(true);
     }
 
         const handelMenuHidden = () => {
-          console.log("hassan");
           setOpen(false);
         };
 
@@ -53,10 +63,15 @@ const HeaderPage = () =>  {
               Training
             </NavLink>
           </li>
-        </ul>
+        </ul>   
         <div className="center-space"></div>
+        <div className='main-cart'>
+        <NavLink to="/order">
         <FaShoppingCart className="cart" />
-        {!open ? (
+        </NavLink>
+       {findProducts ? <div className='notification'></div>:null}
+       </div> 
+       {!open ? (
           <div className="toggle_btn">
             <FaAlignJustify onClick={handelMenuShow} />
           </div>
