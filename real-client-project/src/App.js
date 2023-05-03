@@ -1,6 +1,6 @@
 import "./App.css";
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import AdminLoginPage from "./pages/AdminLogin/AdminLogin.js";
 import UserLoginPage from "./pages/UserLogin/UserLogin.js";
 import HomePage from "./pages/Home/Home.js";
@@ -17,21 +17,29 @@ import DashboardAdmins from "./pages/DashboardAdmins/DashboardAdmins";
 import DashboardOrders from "./pages/DashboardOrders/DashboardOrders";
 import DashboardProducts from "./pages/DashboardProducts/DashboardProducts";
 import DashboardTrainings from "./pages/DashboardTrainings/DashboardTrainings";
+import DashboardCategories from "./pages/DashboardCategories/DashboardCategories";
+import HeaderPage from "./components/header/header";
+import Footer from "./components/footer/footer";
 
 function App() {
+  const location = useLocation();
+  const isDashboardPath = location.pathname.startsWith("/dashboard");
+
   return (
     <div className="App">
       <Routes>
         <Route>
-          <Route exact path="/" element={<HomePage />} />
-          <Route path="admin-login" element={<AdminLoginPage />} />
-          <Route path="user-login" element={<UserLoginPage />} />
-          <Route path="home-page" element={<HomePage />} />
-          <Route path="products" element={<ProductsPage />} />
-          <Route path="training" element={<TrainingPage />} />
-          <Route path="contact" element={<ContactUsPage />} />
-          <Route path="*" element={<NotFound />} />
-          <Route path="unauthorized" element={<Unauthorized />} />
+          <Route>
+            <Route exact path="/" element={<HomePage />} />
+            <Route path="admin-login" element={<AdminLoginPage />} />
+            <Route path="user-login" element={<UserLoginPage />} />
+            <Route path="home-page" element={<HomePage />} />
+            <Route path="products" element={<ProductsPage />} />
+            <Route path="training" element={<TrainingPage />} />
+            <Route path="contact" element={<ContactUsPage />} />
+            <Route path="*" element={<NotFound />} />
+            <Route path="unauthorized" element={<Unauthorized />} />
+          </Route>
           <Route path="/" element={<PrivateRoutes />}>
             <Route path="/" element={<DashboardPage />}>
               <Route path="/dashboard" element={<DashboardHome />} />
@@ -44,6 +52,10 @@ function App() {
               <Route
                 path="/dashboard-trainings"
                 element={<DashboardTrainings />}
+              />
+              <Route
+                path="/dashboard-categories"
+                element={<DashboardCategories />}
               />
             </Route>
           </Route>

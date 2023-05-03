@@ -4,7 +4,7 @@ import Sidebar from "../../components/sidebar";
 import "./Dashboard.css";
 function DashboardPage() {
   return (
-    <div className="dashboard">
+    <div className="main-dashboard">
       <Sidebar />
       <div className="dashboard-pages">
         <Outlet />

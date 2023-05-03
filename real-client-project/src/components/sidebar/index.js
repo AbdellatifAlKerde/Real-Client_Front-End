@@ -45,7 +45,11 @@ const Sidebar = () => {
       <nav className="sidebar-nav">
         {mainNavbarItems.map((item, index) => {
           return (
-            <Tooltip title={isClosed ? item.label : ""} placement="right">
+            <Tooltip
+              key={item.id}
+              title={isClosed ? item.label : ""}
+              placement="right"
+            >
               <NavLink
                 style={({ isActive }) => (isActive ? activeStyle : undefined)}
                 to={item.route}

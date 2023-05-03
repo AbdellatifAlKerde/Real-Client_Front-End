@@ -3,6 +3,7 @@ import LeaderboardRoundedIcon from "@mui/icons-material/LeaderboardRounded";
 import LocalMallRoundedIcon from "@mui/icons-material/LocalMallRounded";
 import LocalShippingRoundedIcon from "@mui/icons-material/LocalShippingRounded";
 import FitnessCenterRoundedIcon from "@mui/icons-material/FitnessCenterRounded";
+import CategoryRoundedIcon from "@mui/icons-material/CategoryRounded";
 export const mainNavbarItems = [
   {
     id: 0,
@@ -33,5 +34,11 @@ export const mainNavbarItems = [
     icon: <FitnessCenterRoundedIcon />,
     label: "Trainings",
     route: "dashboard-trainings",
+  },
+  {
+    id: 5,
+    icon: <CategoryRoundedIcon />,
+    label: "Categories",
+    route: "dashboard-categories",
   },
 ];

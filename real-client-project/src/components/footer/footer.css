@@ -23,7 +23,7 @@
 
 .footer-main p {
   margin-right: 2rem;
-  color: var(--tertiary-color);
+  color: var(--accent-color);
 }
 
 .footer-logo {
@@ -66,14 +66,14 @@
 .footer-link {
   display: block;
   margin-bottom: 0.5rem;
-  color: var(--secondary-color);
+  color: var(--accent-color);
   text-decoration: none;
   transition: color 0.3s ease-in-out;
   padding: 0.5rem 0;
 }
 
 .footer-link:hover {
-  color: var(--accent-color);
+  color: #222;
 }
 
 .footer-categories {
@@ -119,17 +119,17 @@
 .footer-social-media li svg {
   width: 2rem;
   height: 2rem;
-  color: var(--secondary-color);
+  color: var(--accent-color);
 }
 
 .footer-social-media a {
-  color: var(--secondary-color);
+  color: var(--accent-color);
   text-decoration: none;
   transition: color 0.3s ease-in-out;
 }
 
 .footer-social-media a:hover {
-  color: var(--accent-color);
+  color: #222;
 }
 
 .footer-contact {
@@ -160,31 +160,31 @@
 }
 
 .footer-contact svg {
-  color: var(--secondary-color);
+  color: var(--accent-color);
   width: 2rem;
   height: 2rem;
   margin-right: 1rem;
 }
 
 .footer-contact svg:hover {
-  color: var(--accent-color);
+  color: #222;
 }
 
 .footer-contact a {
-  color: var(--secondary-color);
+  color: var(--accent-color);
   text-decoration: none;
   transition: color 0.3s ease-in-out;
 }
 
 .footer-contact a:hover {
-  color: var(--accent-color);
+  color: #222;
 }
 
 .contact-link {
   display: flex;
   align-items: center;
   text-decoration: none;
-  color: var(--secondary-color);
+  color: var(--accent-color);
 }
 
 .contact-link svg {
@@ -194,7 +194,7 @@
 }
 
 .contact-link:hover {
-  color: var(--accent-color);
+  color: #222;
 }
 
 .footer-copyright {
@@ -205,33 +205,32 @@
   left: 50%;
   transform: translateX(-50%);
   width: 100%;
-  color: var(--secondary-color);
+  color: var(--accent-color);
 }
 
 .footer-copyright p {
   margin-bottom: 20px;
 }
 
-.right-space-footer{
-    position: absolute;
-    top: 0;
-    right: 0;
-    background-image: url("../../images/footer-design.png");
-    background-size: contain  ;
-    width: 10%;
-    height: 100%;
+.right-space-footer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-image: url("../../images/footer-design.png");
+  background-size: contain;
+  width: 10%;
+  height: 100%;
 }
 
-.left-space-footer{
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-image: url("../../images/footer-design.png") ;
-    /* border-image-repeat: repeat; */
-    background-size: contain;
-    width: 10%;
-    height: 100%;
-    
+.left-space-footer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-image: url("../../images/footer-design.png");
+  /* border-image-repeat: repeat; */
+  background-size: contain;
+  width: 10%;
+  height: 100%;
 }
 
 /* Small screens */
