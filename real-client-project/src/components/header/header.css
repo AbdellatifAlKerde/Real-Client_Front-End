@@ -1,6 +1,12 @@
 
-
+.holl-header {
+    top: 0;
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+}
 .wrapp{
+    top: 0;
     background-color: #fef1ce;
     height: 10vh    ;
     /* border-bottom: 2px solid rgb(109, 18, 18); */
@@ -38,6 +44,7 @@
     align-items: center;
     justify-content: space-between;
     list-style-type: none;
+    margin-left: -3rem;
 }
 
 .link { 
@@ -71,10 +78,24 @@
     /* background-color: red; */
     color: rgb(109, 18, 18);
     margin-right: 20px;
-    width: 1.3rem;
-    height: 1.3rem;
+    width: 1.9rem;
+    height: 1.9rem;
+    
 }
 
+.main-cart {
+    width: 2rem;
+    position: relative;
+}
+.notification{
+    width: 9px;
+    height: 9px;
+    border-radius: 45%;
+    background-color: red;
+    top: 0;
+    right: 0;
+    position: absolute;
+}
 
 .right-space{
     position: absolute;
@@ -159,6 +180,11 @@
     margin-right: 10px;
     margin-left: -15rem;
 }
+
+.main-cart{
+    margin-right: 4rem;
+}
+
 .center-space{
     display: block;
 }
