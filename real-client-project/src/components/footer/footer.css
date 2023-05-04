@@ -1,3 +1,7 @@
+.holl-footer {
+  display: flex;
+}
+
 .footer {
   background-color: #fef1ce;
   color: var(--secondary-color);
@@ -6,9 +10,10 @@
   justify-content: space-around;
   align-items: flex-start;
   padding: 5rem 10rem;
-  position: absolute;
+  /* position: absolute; */
   bottom: 0;
-  width: 100%;
+  width: 80%;
+  height: 40vh;
 }
 
 .footer-main {
@@ -212,25 +217,36 @@
   margin-bottom: 20px;
 }
 
-.right-space-footer {
-  position: absolute;
-  top: 0;
-  right: 0;
-  background-image: url("../../images/footer-design.png");
-  background-size: contain;
-  width: 10%;
-  height: 100%;
+
+.right-space-footer{
+    /* position: absolute; */
+    bottom: 0;
+    right: 0;
+    background-image: url("../../images/footer-design.png");
+    background-size: contain  ;
+    width: 10%;
+    height:40vh ;
 }
 
-.left-space-footer {
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-image: url("../../images/footer-design.png");
-  /* border-image-repeat: repeat; */
-  background-size: contain;
-  width: 10%;
-  height: 100%;
+.left-space-footer{
+    /* position: absolute; */
+    bottom: 0;
+    left: 0;
+    background-image: url("../../images/footer-design.png") ;
+    /* border-image-repeat: repeat; */
+    background-size: contain;
+    width: 10%;
+    height: 40vh;
+    
+}
+
+@media(max-width: 992px){
+  .right-space-footer{
+    display: none;
+  }
+  .left-space-footer{
+    display: none;
+  }
 }
 
 /* Small screens */
