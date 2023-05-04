@@ -10,7 +10,11 @@
 
 .contact-us-container {
   display: flex;
-  flex: row;
+  align-items: center;
+  justify-content: center;
+  column-gap: 10%;
+  margin-top: 40px;
+  margin-bottom: 40px;
 }
 
 .contact-us-form-container {
@@ -159,4 +163,39 @@
 
 .contact-us-form-submit-btn {
   width: 100%;
+}
+
+/* Mobile styles */
+@media only screen and (max-width: 600px) {
+  .contact-us-page-container {
+    min-height: auto;
+  }
+
+  .contact-us-container {
+    flex-direction: column;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  .contact-us-form-container {
+    padding: 0 20px;
+  }
+
+  .contact-us-page-submit-button {
+    margin-right: 0;
+  }
+}
+
+/* Tablet styles */
+@media only screen and (min-width: 601px) and (max-width: 900px) {
+  .contact-us-container {
+    flex-direction: column;
+  }
+}
+
+/* Desktop styles */
+@media only screen and (min-width: 901px) {
+  .contact-us-container {
+    flex-direction: row;
+  }
 }
