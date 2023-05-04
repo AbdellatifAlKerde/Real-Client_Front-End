@@ -3,9 +3,11 @@ import emailjs from "emailjs-com";
 import { FaEnvelope, FaMapMarkerAlt, FaPhone } from "react-icons/fa";
 import "./ContactUs.css";
 import TextField from "../../components/text-field/text-field.js";
+import Swal from "sweetalert2";
 
 const ContactUs = () => {
   const form = useRef();
+  const [err, setErr] = useState("");
   const [data, setData] = useState({
     email: "",
     name: "",
@@ -16,34 +18,67 @@ const ContactUs = () => {
   const handleChange = (e) => {
     const { value, name } = e.target;
     setData({ ...data, [name]: value });
-    console.log(data);
   };
 
-  const sendEmail = (e) => {
+  const sendEmail = async (e, err) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    emailjs
-      .sendForm(
-        "service_4142vbv",
-        "template_6uy649e",
-        form.current,
-        "CNu08EDHjEOkh-fre"
-      )
-      .then(
-        (result) => {
-          console.log(result.text);
-          setData({
-            email: "",
-            name: "",
-            message: "",
-          });
-        },
-        (error) => {
-          console.log(error.text);
-        }
-      )
-      .finally(() => setIsSubmitting(false));
+    try {
+      if (data.email && data.name && data.message) {
+        await emailjs.sendForm(
+          "service_4142vbv",
+          "template_6uy649e",
+          form.current,
+          "CNu08EDHjEOkh-fre"
+        );
+        setData({
+          email: "",
+          name: "",
+          message: "",
+        });
+        Swal.fire({
+          icon: "success",
+          title: "Success",
+          html: "<span>Email Sent Successfully</span>",
+          timer: 1500,
+          timerProgressBar: true,
+          showCancelButton: false,
+          showConfirmButton: false,
+          color: "#fdfdfd",
+          background: "#810f05",
+        });
+      } else if (!data.name) {
+        setErr("Please Fill Your Name");
+        setTimeout(() => {
+          setErr("");
+        }, 2000);
+      } else if (!data.email) {
+        setErr("Please Fill Your Email");
+        setTimeout(() => {
+          setErr("");
+        }, 2000);
+      } else {
+        setErr("Your Message is reqiured");
+        setTimeout(() => {
+          setErr("");
+        }, 2000);
+      }
+    } catch (error) {
+      Swal.fire({
+        icon: "warning",
+        title: "Failed",
+        html: `<span>${error.message}</span>`,
+        timer: 1500,
+        timerProgressBar: true,
+        showCancelButton: false,
+        showConfirmButton: false,
+        color: "#fdfdfd",
+        background: "#810f05",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   useEffect(() => {
@@ -69,16 +104,7 @@ const ContactUs = () => {
           <form ref={form} onSubmit={sendEmail}>
             <fieldset>
               <legend>Contact Us</legend>
-              {/* <label htmlFor="name">Name</label>
-            <input
-              type="text"
-              id="name"
-              name="user_name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="Your Name"
-              required
-            /> */}
+              <p className="error-message">{err}</p>
               <div>
                 <TextField
                   type="text"
@@ -89,18 +115,9 @@ const ContactUs = () => {
                   onChange={handleChange}
                   style={{ width: "100%" }}
                   placeholder="Enter your name"
+                  required={false}
                 />
               </div>
-              {/* <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              id="email"
-              name="user_email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Your Email"
-              required
-            /> */}
               <div>
                 <TextField
                   type="email"
@@ -111,6 +128,7 @@ const ContactUs = () => {
                   value={data.email}
                   onChange={handleChange}
                   placeholder="Enter your email"
+                  required={false}
                 />
               </div>
               <div>
@@ -121,7 +139,6 @@ const ContactUs = () => {
                   onChange={handleChange}
                   placeholder="Your Message"
                   value={data.message}
-                  required
                 />
               </div>
             </fieldset>
