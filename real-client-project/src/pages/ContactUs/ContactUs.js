@@ -6,10 +6,18 @@ import TextField from "../../components/text-field/text-field.js";
 
 const ContactUs = () => {
   const form = useRef();
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
+  const [data, setData] = useState({
+    email: "",
+    name: "",
+    message: "",
+  });
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleChange = (e) => {
+    const { value, name } = e.target;
+    setData({ ...data, [name]: value });
+    console.log(data);
+  };
 
   const sendEmail = (e) => {
     e.preventDefault();
@@ -25,9 +33,11 @@ const ContactUs = () => {
       .then(
         (result) => {
           console.log(result.text);
-          setName("");
-          setEmail("");
-          setMessage("");
+          setData({
+            email: "",
+            name: "",
+            message: "",
+          });
         },
         (error) => {
           console.log(error.text);
@@ -42,13 +52,15 @@ const ContactUs = () => {
     }
 
     const timer = setTimeout(() => {
-      setName("");
-      setEmail("");
-      setMessage("");
+      setData({
+        email: "",
+        name: "",
+        message: "",
+      });
     }, 3000);
 
     return () => clearTimeout(timer);
-  }, [isSubmitting]);
+  }, [isSubmitting, data]);
 
   return (
     <div className="contact-us-page-container">
@@ -73,7 +85,8 @@ const ContactUs = () => {
                   id="name"
                   label="Name"
                   name="name"
-                  value={name}
+                  value={data.name}
+                  onChange={handleChange}
                   style={{ width: "100%" }}
                   placeholder="Enter your name"
                 />
@@ -94,8 +107,9 @@ const ContactUs = () => {
                   label="Email"
                   id="email"
                   name="email"
-                  value={email}
                   style={{ width: "100%" }}
+                  value={data.email}
+                  onChange={handleChange}
                   placeholder="Enter your email"
                 />
               </div>
@@ -104,9 +118,9 @@ const ContactUs = () => {
                 <textarea
                   id="message"
                   name="message"
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
+                  onChange={handleChange}
                   placeholder="Your Message"
+                  value={data.message}
                   required
                 />
               </div>
@@ -125,15 +139,22 @@ const ContactUs = () => {
         <div className="get-in-touch">
           <h2>Get in touch!</h2>
           <p>
-            <i><FaEnvelope /></i>
+            <i>
+              <FaEnvelope />
+            </i>
             <a href="mailto:your-email@example.com">your-email@example.com</a>
           </p>
           <p>
-            <i><FaPhone /></i>
+            <i>
+              <FaPhone />
+            </i>
             <a href="tel:+123456789">+123456789</a>
           </p>
           <p>
-            <i><FaMapMarkerAlt /></i> 123 Main St, Anytown USA
+            <i>
+              <FaMapMarkerAlt />
+            </i>{" "}
+            123 Main St, Anytown USA
           </p>
         </div>
       </div>

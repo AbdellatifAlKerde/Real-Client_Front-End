@@ -18,8 +18,8 @@ import DashboardOrders from "./pages/DashboardOrders/DashboardOrders";
 import DashboardProducts from "./pages/DashboardProducts/DashboardProducts";
 import DashboardTrainings from "./pages/DashboardTrainings/DashboardTrainings";
 import DashboardCategories from "./pages/DashboardCategories/DashboardCategories";
-import HeaderPage from "./components/header/header";
-import Footer from "./components/footer/footer";
+// import HeaderPage from "./components/header/header";
+// import Footer from "./components/footer/footer";
 
 
 
