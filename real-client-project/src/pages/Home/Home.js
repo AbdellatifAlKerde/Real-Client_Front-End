@@ -1,3 +1,4 @@
+
 import React, { Component } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
@@ -32,6 +33,7 @@ export default class Home extends Component {
         items: 1,
       },
     };
+
 
     return (
       <div className="home">
