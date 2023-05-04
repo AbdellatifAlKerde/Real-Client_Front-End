@@ -22,7 +22,9 @@ import HeaderPage from "./components/header/header";
 import Footer from "./components/footer/footer";
 
 
+
 function App() {
+
   const location = useLocation();
   const isDashboardPath = location.pathname.startsWith("/dashboard");
 
