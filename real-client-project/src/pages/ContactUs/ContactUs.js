@@ -123,15 +123,15 @@ const ContactUs = () => {
         <div className="get-in-touch">
           <h2>Get in touch!</h2>
           <p>
-            <i className="fas fa-envelope"></i>{" "}
+            <i><FaEnvelope /></i>
             <a href="mailto:your-email@example.com">your-email@example.com</a>
           </p>
           <p>
-            <i className="fas fa-phone"></i>{" "}
+            <i><FaPhone /></i>
             <a href="tel:+123456789">+123456789</a>
           </p>
           <p>
-            <i className="fas fa-map-marker-alt"></i> 123 Main St, Anytown USA
+            <i><FaMapMarkerAlt /></i> 123 Main St, Anytown USA
           </p>
         </div>
       </div>
