@@ -66,10 +66,10 @@ function App() {
           <Route exact path="/" element={<HomePage />} />
           <Route path="admin-login" element={<AdminLoginPage />} />
           <Route path="user-login" element={<UserLoginPage />} />
-          <Route path="user-signup" element={<UserSignupPage />} />
+          {/* <Route path="user-signup" element={<UserSignupPage />} /> */}
           <Route path="home-page" element={<HomePage />} />
           <Route path="products" element={<ProductsPage />} />
-          <Route path="products/show-products" element={<ShowProduct />} />
+          {/* <Route path="products/show-products" element={<ShowProduct />} /> */}
           <Route path="training" element={<TrainingPage />} />
           <Route path="contact" element={<ContactUsPage />} />
           <Route path="*" element={<NotFound />} />
