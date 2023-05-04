@@ -1,5 +1,6 @@
 .dashboard-hero-section {
   background-image: url("../../images/RMZNA-user-login-page.png.png");
+  background-size: contain;
   height: 282px;
   margin-bottom: 40px;
   display: flex;
@@ -13,4 +14,10 @@
   padding: 15px;
   border-radius: 10px;
   color: var(--accent-color);
+}
+
+@media (max-width: 480px) {
+  .dashboard-hero-section h2 {
+    font-size: 3rem;
+  }
 }
