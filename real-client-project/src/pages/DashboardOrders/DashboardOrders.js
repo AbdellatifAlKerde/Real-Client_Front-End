@@ -3,13 +3,12 @@ import React, { useState, useEffect } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
+import DoneRoundedIcon from "@mui/icons-material/DoneRounded";
 import axios from "axios";
-import TextField from "../../components/text-field/text-field";
-import MainButton from "../../components/button/button";
 import Swal from "sweetalert2";
 import DashboardHeroSection from "../../components/DashboardHeroSection/DashboardHeroSection";
-import DashboardPopUp from "../../components/DashboardPopUp/DashboardPopUp";
+import Tooltip from "@mui/material/Tooltip";
+import UndoRoundedIcon from "@mui/icons-material/UndoRounded";
 
 function DashboardOrders() {
   const [data, setData] = useState([]);
@@ -43,7 +42,7 @@ function DashboardOrders() {
     {
       field: "user.phoneNumber",
       headerName: "Phone Number",
-      width: 260,
+      width: 200,
       valueGetter: (params) => {
         return params.row.user[0].phoneNumber;
       },
@@ -51,7 +50,7 @@ function DashboardOrders() {
     {
       field: "user.address",
       headerName: "Address",
-      width: 260,
+      width: 200,
       valueGetter: (params) => {
         return params.row.user[0].address;
       },
@@ -65,34 +64,85 @@ function DashboardOrders() {
       },
     },
     {
+      field: "status",
+      headerName: "Status",
+      width: 200,
+    },
+    {
       field: "actions",
       headerName: "Actions",
       width: 200,
       sortable: false,
       renderCell: (params) => (
         <>
-          <IconButton
+          {/* <IconButton
             color="secondary"
             aria-label="delete"
-            onClick={() => deleteOrder(params.id)}
+            onClick={() => softDelete(params.id)}
           >
             <DeleteIcon style={{ color: "var(--accent-color)" }} />
-          </IconButton>
-          {/* <IconButton
-            color="primary"
-            aria-label="edit"
-            onClick={() => {
-              triggerEdit();
-              setOpenPopup(true);
-              setEditId(params.id);
-            }}
-          >
-            <EditIcon style={{ color: "var(--accent-color)" }} />
           </IconButton> */}
+          {params.row.status == "pending" ? (
+            <IconButton
+              color="secondary"
+              aria-label="delete"
+              onClick={() => approveOrder(params.id)}
+            >
+              <Tooltip title="approve" placement="top">
+                <DoneRoundedIcon style={{ color: "green" }} />
+              </Tooltip>
+            </IconButton>
+          ) : (
+            <IconButton
+              color="secondary"
+              aria-label="delete"
+              onClick={() => undoApproveOrder(params.id)}
+            >
+              <Tooltip title="undo" placement="top">
+                <UndoRoundedIcon style={{ color: "#222" }} />
+              </Tooltip>
+            </IconButton>
+          )}
         </>
       ),
     },
   ];
+
+  const approveOrder = async (id) => {
+    try {
+      const response = await axios.patch(
+        `${process.env.REACT_APP_API_URL}/api/order/${id}`,
+        { status: "approved" }
+      );
+      getOrders();
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const undoApproveOrder = async (id) => {
+    try {
+      const response = await axios.patch(
+        `${process.env.REACT_APP_API_URL}/api/order/${id}`,
+        { status: "pending" }
+      );
+      getOrders();
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  // const softDelete = async (id) => {
+  //   try {
+  //     const response = await axios.patch(
+  //       `${process.env.REACT_APP_API_URL}/api/order/${id}`,
+  //       { isHidden: "true" }
+  //     );
+  //     getOrders();
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // };
 
   const getOrders = async () => {
     setIsLoading(true);
