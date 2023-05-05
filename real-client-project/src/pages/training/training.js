@@ -29,7 +29,7 @@ const trainings = [
     image: training3,
   },
 ];
-
+// fkhgb
 const Training = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [showEdit, setShowEdit] = useState("hide-edit");
