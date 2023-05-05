@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import emailjs from "emailjs-com";
-import { FaEnvelope, FaMapMarkerAlt, FaPhone } from "react-icons/fa";
+import { FaEnvelope, FaMapMarkerAlt, FaPhone, FaInstagram } from "react-icons/fa";
 import "./ContactUs.css";
 import TextField from "../../components/text-field/text-field.js";
 import Swal from "sweetalert2";
@@ -21,6 +21,7 @@ const ContactUs = () => {
   };
 
   const sendEmail = async (e, err) => {
+    console.log(data, form.current);
     e.preventDefault();
     setIsSubmitting(true);
 
@@ -156,22 +157,34 @@ const ContactUs = () => {
         <div className="get-in-touch">
           <h2>Get in touch!</h2>
           <p>
-            <i>
-              <FaEnvelope />
-            </i>
-            <a href="mailto:your-email@example.com">your-email@example.com</a>
+            <a href="mailto:rawankrayyem97@gmail.com">
+              <i>
+                <FaEnvelope />
+              </i>
+              rawankrayyem97@gmail.com
+            </a>
           </p>
           <p>
-            <i>
-              <FaPhone />
-            </i>
-            <a href="tel:+123456789">+123456789</a>
+            <a href="tel:+96170664460">
+              <i>
+                <FaPhone />
+              </i>
+              +961-70664460
+            </a>
+          </p>
+          <p>
+            <a href="https://www.instagram.com/rmzna_/">
+              <i>
+                <FaInstagram />
+              </i>
+              instagram.com/rmzna
+            </a>
           </p>
           <p>
             <i>
               <FaMapMarkerAlt />
-            </i>{" "}
-            123 Main St, Anytown USA
+            </i>
+            Tripoli, Lebanon
           </p>
         </div>
       </div>
@@ -179,12 +192,13 @@ const ContactUs = () => {
         <div className="map">
           <iframe
             title="Google Maps showing the location of our client"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3105.607939271958!2d-77.03843538417068!3d38.931773979566794!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89b7b83694653e97%3A0x8b4bf50a4f2c4507!2sWhite%20House!5e0!3m2!1sen!2sus!4v1621896361793!5m2!1sen!2sus"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d52655.44585789661!2d35.804625029112636!3d34.42763484227541!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1521f6ab9db89d33%3A0x323c52527dde8578!2sTripoli!5e0!3m2!1sen!2slb!4v1683204980380!5m2!1sen!2slb"
             width="600"
             height="450"
             style={{ border: 0 }}
             allowfullscreen=""
             loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
           ></iframe>
         </div>
       </div>
