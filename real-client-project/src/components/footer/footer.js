@@ -68,7 +68,7 @@ const Footer = () => {
             <ul>
               <li>
                 <a
-                  href="https://www.facebook.com"
+                  href="https://www.facebook.com/RMZNA.embroidery/"
                   target="_blank"
                   rel="noreferrer"
                 >
@@ -86,7 +86,7 @@ const Footer = () => {
               </li>
               <li>
                 <a
-                  href="https://www.whatsapp.com"
+                  href="https://wa.me/96170664460"
                   target="_blank"
                   rel="noreferrer"
                 >
