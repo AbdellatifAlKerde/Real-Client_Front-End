@@ -11,13 +11,16 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding: 0 20%;
-  padding-bottom: 80px;
+  padding: 0 40px;
+  /* padding-bottom: 80px; */
   height: 100%;
+  /* background-color: rebeccapurple; */
+ 
 }
 
 .home-page-about-content h2 {
   font-size: 2.6rem;
+
 }
 
 .home-page-about-paragraph {
@@ -25,6 +28,8 @@
   font-size: 1.4rem;
   line-height: 1.4;
   color: #444;
+  width: 50%;
+  /* background-color: aqua; */
 }
 
 
@@ -267,4 +272,34 @@ body {
 }
 .vm{
   text-align: end;
+}
+
+
+
+.carousel-container {
+  height: 50vh;
+
+}
+
+.carousel-item {
+  padding: 0 10px;
+ 
+}
+
+.home-page-product-section-heading {
+  text-align: center;
+}
+
+.home-page-product-section-heading h2 {
+  font-size: 3rem;
+}
+
+.home-page-about-image-paragraph {
+  display: flex;
+  align-items: center;
+  /* height: auto; */
+}
+
+.home-page-about-image {
+  /* background-color: red; */
 }

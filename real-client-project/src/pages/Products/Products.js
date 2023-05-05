@@ -40,7 +40,7 @@ const handleAddProducts = (element) => {
       useEffect( () => {
     const fetchData = () => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}product?page=${page}`)
+      .get(`${process.env.REACT_APP_API_URL}/api/product?page=${page}`)
       .then((response) => {
         if (response.status === 200) {
           setProducts(response.data.items);
@@ -61,7 +61,7 @@ const handleAddProducts = (element) => {
 
     useEffect(() => {
         axios
-          .get(`${process.env.REACT_APP_API_URL}category`)
+          .get(`${process.env.REACT_APP_API_URL}/api/category`)
           .then((response) => {
             if (response.status === 200) {
               // console.log(response.data)
@@ -88,7 +88,7 @@ const HandlechangeCategory = async (element) => {
   for (let i = 1; i <= totalPages; i++) {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}product?page=${i}`
+        `${process.env.REACT_APP_API_URL}/api/product?page=${i}`
       );
       if (response.status === 200) {
         const data = response.data.items;
@@ -112,7 +112,7 @@ const HandlechangeCategory = async (element) => {
 const HandleAllCategory = () => {
 
    axios
-     .get(`${process.env.REACT_APP_API_URL}product?page=${page}`)
+     .get(`${process.env.REACT_APP_API_URL}/api/product?page=${page}`)
      .then(
        (response) => {
          if (response.status === 200) {
