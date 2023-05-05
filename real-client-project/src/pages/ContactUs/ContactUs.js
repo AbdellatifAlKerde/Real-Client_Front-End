@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import emailjs from "emailjs-com";
-import { FaEnvelope, FaMapMarkerAlt, FaPhone, FaInstagram } from "react-icons/fa";
+import { FaEnvelope, FaMapMarkerAlt, FaPhone, FaInstagram, FaWhatsapp } from "react-icons/fa";
 import "./ContactUs.css";
 import TextField from "../../components/text-field/text-field.js";
 import Swal from "sweetalert2";
@@ -170,6 +170,14 @@ const ContactUs = () => {
                 <FaPhone />
               </i>
               +961-70664460
+            </a>
+          </p>
+          <p>
+            <a href="https://wa.me/96170664460">
+              <i>
+                <FaWhatsapp />
+              </i>
+              whatsapp.com/rawankrayyem
             </a>
           </p>
           <p>
