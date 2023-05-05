@@ -1,6 +1,6 @@
-import {React , useState , useEffect} from 'react';
+import { React, useState, useEffect } from "react";
 import logo from "../../images/logo-for-web.png";
-import { NavLink} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import {
   FaCartPlus,
   FaShoppingCart,
@@ -9,32 +9,46 @@ import {
 } from "react-icons/fa";
 import "../header/header.css";
 
-const HeaderPage = (props) =>  {
-   const [open , setOpen] = useState(false);
-   const [findProducts , setFindProducts] = useState(false);
-   const [productsAdded , setProductsAdded] = useState([]);
+const HeaderPage = (props) => {
+  const [open, setOpen] = useState(false);
+  const [findProducts, setFindProducts] = useState(false);
+  const [productsAdded, setProductsAdded] = useState([]);
 
-useEffect(() => {
-  setProductsAdded([localStorage.products]);
-},[])
+  useEffect(() => {
+    setProductsAdded([localStorage.products]);
+  }, []);
 
-
-useEffect(() => {
-    if( localStorage.products){
-     setFindProducts(true)
+  useEffect(() => {
+    if (localStorage.products) {
+      setFindProducts(true);
     }
-    
-})
-    const handelMenuShow = () => {
-        setOpen(true);
-    }
+  });
+  const handelMenuShow = () => {
+    setOpen(true);
+  };
 
-        const handelMenuHidden = () => {
-          setOpen(false);
-        };
+  const handelMenuHidden = () => {
+    setOpen(false);
+  };
+
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      if (scrollPosition > 10) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <div className="holl-header">
+    <div className={`holl-header ${isScrolled ? "shadow" : ""}`}>
       <div className="wrapp">
         <div className="left-space"></div>
         <div className="logo-search">
@@ -63,15 +77,15 @@ useEffect(() => {
               Training
             </NavLink>
           </li>
-        </ul>   
+        </ul>
         <div className="center-space"></div>
-        <div className='main-cart'>
-        <NavLink to="/order">
-        <FaShoppingCart className="cart" />
-        </NavLink>
-       {findProducts ? <div className='notification'></div>:null}
-       </div> 
-       {!open ? (
+        <div className="main-cart">
+          <NavLink to="/order">
+            <FaShoppingCart className="cart" />
+          </NavLink>
+          {findProducts ? <div className="notification"></div> : null}
+        </div>
+        {!open ? (
           <div className="toggle_btn">
             <FaAlignJustify onClick={handelMenuShow} />
           </div>
@@ -128,5 +142,5 @@ useEffect(() => {
       </div>
     </div>
   );
-}
+};
 export default HeaderPage;
