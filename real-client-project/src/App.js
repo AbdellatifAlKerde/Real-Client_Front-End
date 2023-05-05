@@ -6,7 +6,7 @@ import UserLoginPage from "./pages/UserLogin/UserLogin.js";
 import HomePage from "./pages/Home/Home.js";
 import ContactUsPage from "./pages/ContactUs/ContactUs.js";
 import ProductsPage from "./pages/Products/Products.js";
-import TrainingPage from "./pages/Training/Training.js";
+import TrainingPage from "./pages/training/training.js";
 import DashboardPage from "./pages/Dashboard/Dashboard.js";
 import NotFound from "./pages/NotFound/NotFound.js";
 import PrivateRoutes from "./utils/privateRoutes";

@@ -1,35 +1,109 @@
-import React from 'react';
-import './training.css';
-import image1 from "../../images/image1.png";
-import image2 from "../../images/image2.png";
-import image3 from "../../images/image3.png";
+import "./training.css";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import training1 from "../../images/image1.jpeg";
+import training2 from "../../images/image2.jpeg";
+import training3 from "../../images/image3.jpeg";
+// import { AiFillCloseCircle } from "react-icons/ai";
 
-function Training() {
+const trainings = [
+  {
+    name: "The Palestinian Cultural Club in Beddawi camp",
+    
+    description:
+      "Lorem Ipsum Dolor Sit Amet Consectetur Adipisicing Elit. Non, Dicta.",
+    image: training1,
+  },
+  {
+    name: "Al-Manara School for Boys affiliated with UNRWA in Nahr Al-Bared camp",
+    
+    description:
+      "Lorem Ipsum Dolor Sit Amet Consectetur Adipisicing Elit. Non, Dicta.",
+    image: training2,
+  },
+  {
+    name: "Mile on the Palestinian market",
+    
+    description:
+      "Lorem Ipsum Dolor Sit Amet Consectetur Adipisicing Elit. Non, Dicta.",
+    image: training3,
+  },
+];
+
+const Training = () => {
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [showEdit, setShowEdit] = useState("hide-edit");
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleEdit = () => {
+    if (isAdmin) {
+      setShowEdit("show-edit");
+    } else {
+      setShowEdit("hide-edit");
+    }
+  };
+
+  const toggleModal = () => {
+    setIsOpen((prevState) => !prevState);
+  };
+
+  const toggleOff = () => {
+    if (isAdmin) {
+      setShowEdit("show-edit");
+    } else {
+      setShowEdit("hide-edit");
+    }
+  };
+
   return (
-    <div className='training-page'>
-      <h2>Training</h2>
-      <div className='training-container'>
-        <div className='training-item'>
-          <img src={image1} alt='Training 1' />
-          <div className='training-description'>
-            <p>Description of training 1</p>
-          </div>
-        </div>
-        <div className='training-item'>
-          <img src={image2} alt='Training 2' />
-          <div className='training-description'>
-            <p>Description of training 2</p>
-          </div>
-        </div>
-        <div className='training-item'>
-          <img src={image3} alt='Training 3' />
-          <div className='training-description'>
-            <p>Description of training 3</p>
-          </div>
-        </div>
+    <div>
+      <section className="training" >
+        <h1 className="heading">
+          Our Training
+        </h1>
+        <div className="box-container">
+          {trainings.map((training, index) => (
+            <div className="box" key={index}>
+              <div className="image">
+                <img src={training.image} alt="" />
+              </div>
+              <div className="content">
+                <span className="title">{training.name}</span>
+                <span>{training.doneBy}</span>
+                <p>{training.description}</p>
+                <div
+                  onMouseOver={toggleEdit}
+                  onMouseLeave={toggleOff}
+                >
+                 
+                  {isOpen && (
+                    <div className="modal-overlay">
+                      <div className="modal-content">
+                        <button
+                          className="close-model"
+                          onClick={toggleModal}
+                        >
+                          {/* <AiFillCloseCircle /> */}
+                        </button>
+                        <h1>Training desc</h1>
+                        <div className="form-model">
+                          <div className="model-img">
+                            <img src={training.image} alt="img" />
+                           
+                          </div>
+                          
+                      </div>
+                  </div>
+              </div>
+          )}
       </div>
-    </div>
-  );
+  </div>
+</div>
+))}
+</div>
+</section>
+</div>
+);
 }
 
 export default Training;

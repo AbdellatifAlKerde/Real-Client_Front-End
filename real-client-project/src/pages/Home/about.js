@@ -6,6 +6,7 @@ import image4 from "../../images/image4.png";
 import image6 from "../../images/image6.png";
 import image5 from "../../images/image5.png";
 import { Link } from 'react-router-dom';
+import logo from '../../images/logo-for-web.png'
 // import { AiFillCloseCircle } from 'react-icons';
 
 // import image7 from "../../images/image7.png";
@@ -71,6 +72,10 @@ export class Products extends Component {
                     <h2>
                        About Us
                     </h2>
+                    <div className="home-page-about-image-paragraph">
+                    <div className="home-page-about-image">
+                        <img src={logo} width='100%' height='100%' style={{objectFit: 'cover'}}/>
+                    </div>
                     <p className="home-page-about-paragraph">
                         RMZNA is a distinguished Palestinian Hand Embroidery Brand that proudly showcases the rich cultural heritage of Palestine through its personalized and modern designs. While keeping true to traditional embroidery techniques, RMZNA intertwines the struggles and identity of Palestine within each piece, creating a powerful narrative that pays homage to the past while propelling towards the future.
 
@@ -80,6 +85,7 @@ As a brand, RMZNA is committed to keeping Palestinian heritage alive by introduc
 
 Overall, RMZNA's dedication to the preservation of Palestinian culture and identity through its hand-embroidered designs is a true testament to its commitment to excellence and creativity.
                     </p>
+                    </div>
                     </div>
                     
                     {/* <div className="bv">
@@ -133,11 +139,7 @@ Overall, RMZNA's dedication to the preservation of Palestinian culture and ident
                             </div>
                         ))}
                     </div>
-                    <div className="vm">
-                    <Link to="/products" className="btn">
-                                            view more
-                                        </Link>
-                    </div>
+              
                     </div> */}
                 </section>
             </div>
