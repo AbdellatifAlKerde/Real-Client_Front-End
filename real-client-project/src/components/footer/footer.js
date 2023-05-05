@@ -14,7 +14,7 @@ import {
 const Footer = () => {
   return (
     <div className="holl-footer">
-        <div className="right-space-footer"></div>
+      <div className="right-space-footer"></div>
       <footer className="footer">
         <div className="footer-main">
           <div className="footer-logo">
@@ -129,7 +129,7 @@ const Footer = () => {
           </p>
         </div>
       </footer>
-        <div className="left-space-footer"></div>
+      <div className="left-space-footer"></div>
     </div>
   );
 };
