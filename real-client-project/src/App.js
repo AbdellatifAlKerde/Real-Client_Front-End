@@ -1,5 +1,5 @@
 import "./App.css";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import AdminLoginPage from "./pages/AdminLogin/AdminLogin.js";
 import UserLoginPage from "./pages/UserLogin/UserLogin.js";
@@ -21,8 +21,11 @@ import DashboardTrainings from "./pages/DashboardTrainings/DashboardTrainings";
 import DashboardCategories from "./pages/DashboardCategories/DashboardCategories";
 import HeaderPage from "./components/header/header";
 import Footer from "./components/footer/footer";
+import Spinner from "./components/spinner/spinner";
 
 function App() {
+  const [isLoading, setIsLoading] = useState(true);
+
   const location = useLocation();
   const isDashboardPath = location.pathname.startsWith("/dashboard");
   const isNotFoundPath = location.pathname === "*";
@@ -32,64 +35,90 @@ function App() {
   const shouldRenderHeader =
     !isDashboardPath && !isNotFoundPath && !isUnauthorizedPath;
 
+  useEffect(() => {
+    // Simulate a delay in loading the page
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+  }, []);
+
   return (
     <div className="App">
       {shouldRenderHeader && <HeaderPage />}
-      <div
-        className="pages"
-        style={shouldRenderHeader ? { marginTop: "85px" } : { marginTop: 0 }}
-      >
-        <Routes>
-          <Route>
+      {isLoading ? (
+        <div
+          style={{
+            display: "flex",
+            width: "100%",
+            minHeight: "100vh",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Spinner />
+        </div>
+      ) : (
+        <div
+          className="pages"
+          style={shouldRenderHeader ? { marginTop: "85px" } : { marginTop: 0 }}
+        >
+          <Routes>
             <Route>
+              <Route>
+                <Route exact path="/" element={<HomePage />} />
+                <Route path="admin-login" element={<AdminLoginPage />} />
+                <Route path="user-login" element={<UserLoginPage />} />
+                <Route path="home-page" element={<HomePage />} />
+                <Route path="products" element={<ProductsPage />} />
+                <Route path="training" element={<TrainingPage />} />
+                <Route path="contact" element={<ContactUsPage />} />
+                <Route path="*" element={<NotFound />} />
+                <Route path="unauthorized" element={<Unauthorized />} />
+              </Route>
+              <Route path="/" element={<PrivateRoutes />}>
+                <Route path="/" element={<DashboardPage />}>
+                  <Route path="/dashboard" element={<DashboardHome />} />
+                  <Route
+                    path="/dashboard-admins"
+                    element={<DashboardAdmins />}
+                  />
+                  <Route
+                    path="/dashboard-orders"
+                    element={<DashboardOrders />}
+                  />
+                  <Route
+                    path="/dashboard-products"
+                    element={<DashboardProducts />}
+                  />
+                  <Route
+                    path="/dashboard-trainings"
+                    element={<DashboardTrainings />}
+                  />
+                  <Route
+                    path="/dashboard-categories"
+                    element={<DashboardCategories />}
+                  />
+                </Route>
+              </Route>
+
+              <Route exact path="/order" element={<Order />} />
+              <Route exact path="/show-product" element={<HomePage />} />
               <Route exact path="/" element={<HomePage />} />
               <Route path="admin-login" element={<AdminLoginPage />} />
               <Route path="user-login" element={<UserLoginPage />} />
+              {/* <Route path="user-signup" element={<UserSignupPage />} /> */}
               <Route path="home-page" element={<HomePage />} />
               <Route path="products" element={<ProductsPage />} />
+              {/* <Route path="products/show-products" element={<ShowProduct />} /> */}
               <Route path="training" element={<TrainingPage />} />
               <Route path="contact" element={<ContactUsPage />} />
               <Route path="*" element={<NotFound />} />
               <Route path="unauthorized" element={<Unauthorized />} />
             </Route>
-            <Route path="/" element={<PrivateRoutes />}>
-              <Route path="/" element={<DashboardPage />}>
-                <Route path="/dashboard" element={<DashboardHome />} />
-                <Route path="/dashboard-admins" element={<DashboardAdmins />} />
-                <Route path="/dashboard-orders" element={<DashboardOrders />} />
-                <Route
-                  path="/dashboard-products"
-                  element={<DashboardProducts />}
-                />
-                <Route
-                  path="/dashboard-trainings"
-                  element={<DashboardTrainings />}
-                />
-                <Route
-                  path="/dashboard-categories"
-                  element={<DashboardCategories />}
-                />
-              </Route>
-            </Route>
-
-            <Route exact path="/order" element={<Order />} />
-            <Route exact path="/show-product" element={<HomePage />} />
-            <Route exact path="/" element={<HomePage />} />
-            <Route path="admin-login" element={<AdminLoginPage />} />
-            <Route path="user-login" element={<UserLoginPage />} />
-            {/* <Route path="user-signup" element={<UserSignupPage />} /> */}
-            <Route path="home-page" element={<HomePage />} />
-            <Route path="products" element={<ProductsPage />} />
-            {/* <Route path="products/show-products" element={<ShowProduct />} /> */}
-            <Route path="training" element={<TrainingPage />} />
-            <Route path="contact" element={<ContactUsPage />} />
-            <Route path="*" element={<NotFound />} />
-            <Route path="unauthorized" element={<Unauthorized />} />
-          </Route>
-        </Routes>
-      </div>
+          </Routes>
+        </div>
+      )}
       {shouldRenderHeader && <Footer />}
-
     </div>
   );
 }
