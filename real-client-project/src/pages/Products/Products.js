@@ -18,6 +18,22 @@ const Products = () => {
   const [openPagginationButton , setOpenPagginationButton] = useState(true);
   const [showProduct , setShowProduct] = useState(false);
   const [idProductShowed  , setIdProductShowed] = useState();
+  const [isMounted, setIsMounted] = useState(false);
+
+useEffect(() => {
+  setIsMounted(true);
+}, []);
+
+useEffect(() => {
+  if (isMounted && localStorage.idProduct !== undefined) {
+    setIdProductShowed(localStorage.idProduct);
+    setShowProduct(true);
+  }
+}, [isMounted]);
+
+console.log(showProduct);
+console.log(idProductShowed);
+
 
   localStorage.setItem("products" , addProducts);
 
@@ -46,7 +62,6 @@ const handleAddProducts = (element) => {
           setProducts(response.data.items);
           countNUmberPages(response.data.totalPages);
           setTotalPages(response.data.totalPages);
-
         }
       })
       .catch((error) => {
@@ -134,7 +149,13 @@ setOpenPagginationButton(true)
 const handleShowProduct = (element , id) => {
  setShowProduct(element);
  setIdProductShowed(id); 
+ setIsMounted(element);
 }
+
+//show product from the search bar
+// if (localStorage.nameProduct !== undefined) {
+//   handleShowPro
+// }
 
 
 return (
@@ -197,7 +218,11 @@ return (
         {!openPagginationButton ? <div className="footer-space"></div> : null}
       </div>
     ) : (
-      <ShowProduct id={idProductShowed} addProducts={handleAddProducts} show={handleShowProduct}/>
+      <ShowProduct
+        id={idProductShowed}
+        addProducts={handleAddProducts}
+        show={handleShowProduct}
+      />
     )}
     <Footer />
   </div>

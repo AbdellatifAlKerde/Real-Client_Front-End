@@ -3,6 +3,7 @@ import React from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import AdminLoginPage from "./pages/AdminLogin/AdminLogin.js";
 import UserLoginPage from "./pages/UserLogin/UserLogin.js";
+// import UserSignupPage from "./pages/UserSignup/UserSignup.js";
 import HomePage from "./pages/Home/Home.js";
 import ContactUsPage from "./pages/ContactUs/ContactUs.js";
 import ProductsPage from "./pages/Products/Products.js";
@@ -88,6 +89,7 @@ function App() {
         </Routes>
       </div>
       {shouldRenderHeader && <Footer />}
+
     </div>
   );
 }
