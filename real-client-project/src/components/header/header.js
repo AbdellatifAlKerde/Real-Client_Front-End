@@ -137,16 +137,7 @@ const HeaderPage = (props) => {
               Home
             </NavLink>
           </li>
-          <li>
-            <NavLink
-              className="link"
-              to="/contact"
-              href="#hero"
-              style={({ isActive }) => (isActive ? activeStyle : undefined)}
-            >
-              Contact
-            </NavLink>
-          </li>
+
           <li>
             <NavLink
               className="link"
@@ -165,6 +156,16 @@ const HeaderPage = (props) => {
               style={({ isActive }) => (isActive ? activeStyle : undefined)}
             >
               Training
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              className="link"
+              to="/contact"
+              href="#hero"
+              style={({ isActive }) => (isActive ? activeStyle : undefined)}
+            >
+              Contact
             </NavLink>
           </li>
         </ul>
@@ -197,17 +198,7 @@ const HeaderPage = (props) => {
                 Home
               </NavLink>
             </li>
-            <li>
-              <NavLink
-                className="link"
-                to="/contact"
-                href="#hero"
-                onClick={handelMenuHidden}
-                style={({ isActive }) => (isActive ? activeStyle : undefined)}
-              >
-                Contact
-              </NavLink>
-            </li>
+
             <li>
               <NavLink
                 className="link"
@@ -228,6 +219,17 @@ const HeaderPage = (props) => {
                 style={({ isActive }) => (isActive ? activeStyle : undefined)}
               >
                 Training
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                className="link"
+                to="/contact"
+                href="#hero"
+                onClick={handelMenuHidden}
+                style={({ isActive }) => (isActive ? activeStyle : undefined)}
+              >
+                Contact
               </NavLink>
             </li>
           </div>
