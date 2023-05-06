@@ -5,7 +5,7 @@ import "./UserLogin.css";
 import logo from "../../images/logo-for-web.png";
 import axios from "axios";
 import Spinner from "../../components/spinner/spinner";
-
+import Cookies from "js-cookie";
 const UserLoginPage = () => {
   const [signup, setSignup] = useState(false);
   const [userSignup, setUserSignup] = useState({
@@ -112,7 +112,10 @@ const UserLoginPage = () => {
       setIsLoading(false);
 
       if (response.status == 200) {
-        localStorage.setItem("user-token", response.data.token);
+        const expirationTime = new Date(new Date().getTime() + 60 * 60 * 1000);
+        Cookies.set("user-token", response.data.token, {
+          expires: expirationTime,
+        });
       } else {
         console.error(response.data.message);
       }
