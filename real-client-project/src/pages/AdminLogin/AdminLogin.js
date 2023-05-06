@@ -41,9 +41,10 @@ function AdminLoginPage() {
       setIsLoading(false);
 
       if (response.status == 200) {
-        const expirationTime = new Date(new Date().getTime() + 60 * 60 * 1000);
+        const oneWeek = 7 * 24 * 60 * 60 * 1000;
+
         Cookies.set("admin-token", response.data.token, {
-          expires: expirationTime,
+          expires: oneWeek,
         });
         localStorage.setItem("admin-full-name", response.data.fullName);
         localStorage.setItem("admin-email", response.data.email);

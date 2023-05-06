@@ -304,3 +304,9 @@ body {
     width: 100%;
   }
 }
+
+.training-heading {
+  text-align: center;
+  font-size: 3rem;
+  margin-top: 40px;
+}
