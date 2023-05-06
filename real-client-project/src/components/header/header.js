@@ -1,7 +1,9 @@
 import {React , useState , useEffect} from 'react';
+import axios from "axios";
 import logo from "../../images/logo-for-web.png";
 import { NavLink} from "react-router-dom";
 import {
+  FaSearchengin,
   FaCartPlus,
   FaShoppingCart,
   FaAlignJustify,
@@ -10,28 +12,83 @@ import {
 import "../header/header.css";
 
 const HeaderPage = (props) =>  {
-   const [open , setOpen] = useState(false);
-   const [findProducts , setFindProducts] = useState(false);
-   const [productsAdded , setProductsAdded] = useState([]);
+  const [open, setOpen] = useState(false);
+  const [findProducts, setFindProducts] = useState(false);
+  const [allProducts, setAllProducts] = useState([]);
+  const [totalPages, setTotalPages] = useState(0);
+  const [dataAllProducts, setDataAllProducts] = useState([]);
+  const [inputValue, setInputValue] = useState("");
 
-useEffect(() => {
-  setProductsAdded([localStorage.products]);
-},[])
+
+  const handleInputChange = (event) => {
+    const value = event.target.value;
+    setInputValue(value);
+  };
 
 
-useEffect(() => {
-    if( localStorage.products){
-     setFindProducts(true)
+  const handleButtonClick = () => {
+    for(let i = 0 ; i < dataAllProducts.length ; i++){
+      if(inputValue.toLowerCase() === dataAllProducts[i].name.toLowerCase()){
+       localStorage.setItem("idProduct", dataAllProducts[i].id);
+      }
     }
     
-})
-    const handelMenuShow = () => {
-        setOpen(true);
-    }
+    
+  };
 
-        const handelMenuHidden = () => {
-          setOpen(false);
-        };
+
+
+  useEffect(() => {
+    if (localStorage.products !== "") {
+      setFindProducts(true);
+    }
+  });
+  const handelMenuShow = () => {
+    setOpen(true);
+  };
+
+  const handelMenuHidden = () => {
+    setOpen(false);
+  };
+
+  // const handleOpenOrder = () => {
+  //   setFindProducts(false);
+  // }
+
+  //// fetching the all products
+  useEffect(() => {
+    axios.get(`${process.env.REACT_APP_API_URL}product`).then((response) => {
+      setAllProducts(response.data);
+      setTotalPages(response.data.totalPages);
+    });
+  }, []);
+
+  // console.log(allProducts);
+  // console.log(totalPages);
+  const HandleGetNameProducts = async () => {
+    const allProducts = [];
+    for (let i = 1; i <= totalPages; i++) {
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_API_URL}product?page=${i}`
+        );
+        if (response.status === 200) {
+          const data = response.data.items;
+          if (data) {
+            for (let y = 0; y < data.length; y++) {
+              allProducts.push({name :data[y].name ,id : data[y]._id });
+            }
+          }
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    // allProducts array now contains all items with the specific category
+    setDataAllProducts(allProducts);
+  };
+
+  console.log(dataAllProducts);
 
   return (
     <div className="holl-header">
@@ -39,7 +96,21 @@ useEffect(() => {
         <div className="left-space"></div>
         <div className="logo-search">
           <img className="header-logo" src={logo} width="2rem" height="2rem" />
-          <input className="search-bare" placeholder="search..."></input>
+          <div className="search-icon_search">
+            <input
+              className="search-bare"
+              placeholder="search..."
+              onFocus={HandleGetNameProducts}
+              value={inputValue}
+              onChange={handleInputChange}
+            ></input>
+      <NavLink to="/products">
+            <FaSearchengin
+              className="icon-search"
+              onClick={handleButtonClick}
+            />   
+      </NavLink>       
+          </div>
         </div>
 
         <ul className="list">
@@ -63,15 +134,15 @@ useEffect(() => {
               Training
             </NavLink>
           </li>
-        </ul>   
+        </ul>
         <div className="center-space"></div>
-        <div className='main-cart'>
-        <NavLink to="/order">
-        <FaShoppingCart className="cart" />
-        </NavLink>
-       {findProducts ? <div className='notification'></div>:null}
-       </div> 
-       {!open ? (
+        <div className="main-cart">
+          <NavLink to="/order">
+            <FaShoppingCart className="cart" />
+          </NavLink>
+          {findProducts ? <div className="notification"></div> : null}
+        </div>
+        {!open ? (
           <div className="toggle_btn">
             <FaAlignJustify onClick={handelMenuShow} />
           </div>

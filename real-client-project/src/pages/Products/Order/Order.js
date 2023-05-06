@@ -50,7 +50,23 @@ const handleRemoveProduct = (element) => {
   localStorage.setItem("products", productsOrder);
   setTriggerFetchData(true);
 }
-// console.log(fakeData);
+
+// const addOrder = async() => {
+//   try{
+//     const user = "id_user";
+//     const products =["products"];
+    
+//     const response = await axios.post(`${process.env.REACT_APP_API_URL}order`, {
+//       user,
+//       products
+//     })
+  
+//   }catch(error){
+//     console.error(error.message);
+//   }
+
+// }
+
   return (
     <div>
       <Header />
