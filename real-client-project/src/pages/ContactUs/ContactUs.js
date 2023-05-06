@@ -1,6 +1,13 @@
 import React, { useRef, useState, useEffect } from "react";
 import emailjs from "emailjs-com";
-import { FaEnvelope, FaMapMarkerAlt, FaPhone, FaInstagram, FaWhatsapp, FaFacebook } from "react-icons/fa";
+import {
+  FaEnvelope,
+  FaMapMarkerAlt,
+  FaPhone,
+  FaInstagram,
+  FaWhatsapp,
+  FaFacebook,
+} from "react-icons/fa";
 import "./ContactUs.css";
 import TextField from "../../components/text-field/text-field.js";
 import Swal from "sweetalert2";
@@ -100,6 +107,9 @@ const ContactUs = () => {
 
   return (
     <div className="contact-us-page-container">
+      <div className="main-hero-section-contact">
+        <h2>Contact Us</h2>
+      </div>
       <div className="contact-us-container">
         <div className="contact-us-form-container">
           <form ref={form} onSubmit={sendEmail}>

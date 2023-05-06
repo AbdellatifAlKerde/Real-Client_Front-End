@@ -111,11 +111,14 @@ const UserLoginPage = () => {
       );
       setIsLoading(false);
 
+      console.log(response);
+
       if (response.status == 200) {
-        const expirationTime = new Date(new Date().getTime() + 60 * 60 * 1000);
+        const oneWeek = 7 * 24 * 60 * 60 * 1000;
         Cookies.set("user-token", response.data.token, {
-          expires: expirationTime,
+          expires: oneWeek,
         });
+        Cookies.set("user-id", response.data.id);
       } else {
         console.error(response.data.message);
       }

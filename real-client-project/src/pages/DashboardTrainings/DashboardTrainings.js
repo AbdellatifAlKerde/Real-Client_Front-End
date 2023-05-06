@@ -340,6 +340,7 @@ function DashboardTrainings() {
               name={isEdit ? "Edit" : "Add"}
               style={{ width: "100%", padding: "1rem 0" }}
               type="submit"
+              onClick={() => setIsEdit(false)}
             />
             {isSubmitting && (
               <Spinner

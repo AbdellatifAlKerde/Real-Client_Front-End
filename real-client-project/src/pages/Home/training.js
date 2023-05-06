@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 function Training() {
   return (
     <div className="home-page-training">
-      <h2 id="training-heading">Training Section</h2>
+      <h2 className="training-heading">Trainings</h2>
 
       <div className="training-container">
         <div className="training-text">
