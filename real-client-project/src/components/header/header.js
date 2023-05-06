@@ -20,7 +20,7 @@ const HeaderPage = (props) =>  {
   const [totalPages, setTotalPages] = useState(0);
   const [dataAllProducts, setDataAllProducts] = useState([]);
   const [inputValue, setInputValue] = useState("");
-
+  const [isScrolled , setIsScrolled] = useState(false);
 
   const handleInputChange = (event) => {
     const value = event.target.value;
@@ -92,6 +92,19 @@ const HeaderPage = (props) =>  {
 
   console.log(dataAllProducts);
 
+ useEffect(() => {
+  const handleScroll = () => {
+    const scrollPosition = window.scrollY;
+    if(scrollPosition > 10){
+      setIsScrolled(true);
+    }else{
+      setIsScrolled(false);
+    }
+  };
+
+window.addEventListener("scroll",handleScroll);
+return () => window.removeEventListener("scroll" , handleScroll);
+ }, []);
 
   return (
     <div className={`holl-header ${isScrolled ? "shadow" : ""}`}>
