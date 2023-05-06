@@ -7,7 +7,7 @@ const Card = (props) => {
     const [showProduct, setShowProduct] = useState(false);
 
   return (
-    <div className="container">
+    <div className="container" style={props.style}>
 <div className="header-card">           
         <div  className="transparent-div" onClick={() => props.show(true , props.id)}></div>
         <img src={props.image} alt="product-card" />

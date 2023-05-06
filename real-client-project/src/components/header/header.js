@@ -1,7 +1,8 @@
+
 import {React , useState , useEffect} from 'react';
 import axios from "axios";
 import logo from "../../images/logo-for-web.png";
-import { NavLink} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import {
   FaSearchengin,
   FaCartPlus,
@@ -10,6 +11,7 @@ import {
   FaAlignCenter,
 } from "react-icons/fa";
 import "../header/header.css";
+
 
 const HeaderPage = (props) =>  {
   const [open, setOpen] = useState(false);
@@ -90,8 +92,9 @@ const HeaderPage = (props) =>  {
 
   console.log(dataAllProducts);
 
+
   return (
-    <div className="holl-header">
+    <div className={`holl-header ${isScrolled ? "shadow" : ""}`}>
       <div className="wrapp">
         <div className="left-space"></div>
         <div className="logo-search">
@@ -199,5 +202,5 @@ const HeaderPage = (props) =>  {
       </div>
     </div>
   );
-}
+};
 export default HeaderPage;

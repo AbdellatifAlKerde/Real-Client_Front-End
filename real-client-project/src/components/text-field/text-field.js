@@ -9,7 +9,7 @@ function TextField(props) {
         className="global-text-field"
         type={props.type}
         placeholder={props.placeholder}
-        required
+        required={props.required ? props.required : false}
         style={props.style}
         onChange={props.onChange}
         name={props.name}

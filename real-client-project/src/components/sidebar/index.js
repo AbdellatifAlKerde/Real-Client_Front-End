@@ -9,6 +9,7 @@ import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 import { NavLink } from "react-router-dom";
 import Tooltip from "@mui/material/Tooltip";
 import logo from "../../images/RMZNA-logo.jpg";
+import Cookies from "js-cookie";
 
 const Sidebar = () => {
   const [isClosed, setIsClosed] = useState(true);
@@ -54,7 +55,7 @@ const Sidebar = () => {
                 style={({ isActive }) => (isActive ? activeStyle : undefined)}
                 to={item.route}
                 key={item.id}
-                // onClick={() => navigate(item.route)}
+                onClick={!isClosed ? close : ""}
                 className="sidebar-links spacing hover"
               >
                 <p>{item.icon}</p>
@@ -70,7 +71,7 @@ const Sidebar = () => {
             to="/admin-login"
             className="sidebar-logout spacing hover"
             onClick={() => {
-              localStorage.removeItem("admin-token");
+              Cookies.remove("admin-token");
               localStorage.removeItem("admin-full-name");
               localStorage.removeItem("admin-email");
             }}

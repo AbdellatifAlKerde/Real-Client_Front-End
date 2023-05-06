@@ -4,6 +4,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -14,6 +15,7 @@ body {
   --primary-color: #fff;
   --secondary-color: #fef1ce;
   --accent-color: #810f05;
+  /* --accent-color: #0077b6; */
 
   --color: #4b100c;
 }
