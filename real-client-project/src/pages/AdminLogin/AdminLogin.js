@@ -6,6 +6,7 @@ import logo from "../../images/RMZNA-logo.jpg";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Spinner from "../../components/spinner/spinner";
+import Cookies from "js-cookie";
 
 function AdminLoginPage() {
   const navigate = useNavigate();
@@ -40,7 +41,11 @@ function AdminLoginPage() {
       setIsLoading(false);
 
       if (response.status == 200) {
-        localStorage.setItem("admin-token", response.data.token);
+        const oneWeek = 7 * 24 * 60 * 60 * 1000;
+
+        Cookies.set("admin-token", response.data.token, {
+          expires: oneWeek,
+        });
         localStorage.setItem("admin-full-name", response.data.fullName);
         localStorage.setItem("admin-email", response.data.email);
 

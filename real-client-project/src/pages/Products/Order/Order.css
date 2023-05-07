@@ -36,12 +36,24 @@
  width: 100%;
  display: flex;
  justify-content: end;
+ align-items: center;
+}
+.div-confirme p{
+    margin-top: 20%;
 }
 .confirme {
     background: linear-gradient(135deg, #fef1fe ,rgb(158, 62, 62) 30%  );
+    font-weight: 600;
+    letter-spacing: 1.2 px;
 }
 
 .confirme:hover{
     cursor: pointer;
     background: linear-gradient(135deg,  rgb(158, 62, 62) 80% , #fef1fe);
+}
+
+@media(max-width : 992px){
+    .confirme {
+        width: 30%;
+    }
 }

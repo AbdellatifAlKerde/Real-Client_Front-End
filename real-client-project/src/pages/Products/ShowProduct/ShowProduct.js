@@ -5,8 +5,10 @@ import "./ShowProduct.css"
 const ShowProduct = (props) => {
   const [dataProduct, setDataProduct] = useState([]);
   const [categoryname, setCategoryname] = useState("");
+
+  
 useEffect(() => {
-axios.get(`${process.env.REACT_APP_API_URL}product/${props.id}`)
+axios.get(`${process.env.REACT_APP_API_URL}/api/product/${props.id}`)
 .then((response) => {
   setDataProduct(response.data);
   setCategoryname(response.data.category[0].name)
@@ -14,8 +16,10 @@ axios.get(`${process.env.REACT_APP_API_URL}product/${props.id}`)
 })
 const handelCancel = () => {
 props.show(false)
+if(localStorage.idProduct !== undefined){
+  localStorage.removeItem("idProduct");
 }
-console.log()
+}
 
     return (
       <div>

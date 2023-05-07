@@ -5,7 +5,7 @@ import "./UserLogin.css";
 import logo from "../../images/logo-for-web.png";
 import axios from "axios";
 import Spinner from "../../components/spinner/spinner";
-
+import Cookies from "js-cookie";
 const UserLoginPage = () => {
   const [signup, setSignup] = useState(false);
   const [userSignup, setUserSignup] = useState({
@@ -27,6 +27,23 @@ const UserLoginPage = () => {
 
   const [email, setEmail] = useState("");
   const [isValid, setIsValid] = useState(true);
+
+  const emptySignupTextFields = () => {
+    setUserSignup({
+      fullName: "",
+      address: "",
+      phoneNumber: "",
+      email: "",
+      password: "",
+    });
+  };
+
+  const emptyLoginTextFields = () => {
+    setUserLogin({
+      email: "",
+      password: "",
+    });
+  };
 
   const handleInputChange = (event) => {
     setEmail(event.target.value);
@@ -64,7 +81,14 @@ const UserLoginPage = () => {
         signUp
       );
       setIsLoading(false);
-      console.log(response);
+      setUserSignup({
+        fullName: "",
+        address: "",
+        phoneNumber: "",
+        email: "",
+        password: "",
+      });
+      setSignup(false);
     } catch (e) {
       console.log(e);
       setErrorMessage({ error: e.response.data.message });
@@ -87,8 +111,14 @@ const UserLoginPage = () => {
       );
       setIsLoading(false);
 
+      console.log(response);
+
       if (response.status == 200) {
-        localStorage.setItem("user-token", response.data.token);
+        const oneWeek = 7 * 24 * 60 * 60 * 1000;
+        Cookies.set("user-token", response.data.token, {
+          expires: oneWeek,
+        });
+        Cookies.set("user-id", response.data.id);
       } else {
         console.error(response.data.message);
       }
@@ -138,6 +168,7 @@ const UserLoginPage = () => {
                   style={{ fontSize: "16px", padding: "15px" }}
                   name="email"
                   onChange={handleLoginChange}
+                  value={userLogin.email}
                 />
               </div>
               <div className="user-login-page-password">
@@ -148,6 +179,7 @@ const UserLoginPage = () => {
                   style={{ fontSize: "16px", padding: "15px" }}
                   name="password"
                   onChange={handleLoginChange}
+                  value={userLogin.password}
                 />
               </div>
               <div className="user-login-page-buttons">
@@ -171,7 +203,10 @@ const UserLoginPage = () => {
               </div>
               <div>
                 <p
-                  onClick={() => setSignup(true)}
+                  onClick={() => {
+                    setSignup(true);
+                    emptyLoginTextFields();
+                  }}
                   className="user-login-page-signup-nav"
                 >
                   Don't have an account? signup
@@ -224,6 +259,7 @@ const UserLoginPage = () => {
                   style={{ fontSize: "16px", padding: "15px" }}
                   name="fullName"
                   onChange={handleSignUpChange}
+                  value={userSignup.fullName}
                 />
               </div>
               <div className="user-login-page-address-phone">
@@ -235,6 +271,7 @@ const UserLoginPage = () => {
                     style={{ fontSize: "16px", padding: "15px" }}
                     name="address"
                     onChange={handleSignUpChange}
+                    value={userSignup.address}
                   />
                 </div>
                 <div>
@@ -246,6 +283,7 @@ const UserLoginPage = () => {
                     style={{ fontSize: "16px", padding: "15px" }}
                     name="phoneNumber"
                     onChange={handleSignUpChange}
+                    value={userSignup.phoneNumber}
                   />
                 </div>
               </div>
@@ -257,6 +295,7 @@ const UserLoginPage = () => {
                   style={{ fontSize: "16px", padding: "15px" }}
                   name="email"
                   onChange={handleCombinedChange}
+                  value={userSignup.email}
                 />
               </div>
               <div className="user-login-page-password">
@@ -267,6 +306,7 @@ const UserLoginPage = () => {
                   style={{ fontSize: "16px", padding: "15px" }}
                   name="password"
                   onChange={handleSignUpChange}
+                  value={userSignup.password}
                 />
               </div>
               <div className="user-login-page-buttons">
@@ -290,7 +330,10 @@ const UserLoginPage = () => {
               </div>
               <div>
                 <p
-                  onClick={() => setSignup(false)}
+                  onClick={() => {
+                    setSignup(false);
+                    emptySignupTextFields();
+                  }}
                   className="user-login-page-signup-nav"
                 >
                   Already have an account? login

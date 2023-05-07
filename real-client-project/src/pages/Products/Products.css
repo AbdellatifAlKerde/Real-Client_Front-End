@@ -19,7 +19,6 @@
 
 .category-item:hover{
     cursor: pointer;
-  border: 2px solid rgb(158, 62, 62);
   color: rgb(158, 62, 62);
   background-color: white;
 }
