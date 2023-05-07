@@ -71,6 +71,7 @@
 
 .training-text {
   padding: 0 80px;
+  padding-bottom: 40px;
 }
 
 .training-text .training {
@@ -280,7 +281,15 @@ body {
 .home-page-about-image-paragraph {
   display: flex;
   align-items: center;
+  height: 700px;
   /* height: auto; */
+}
+
+@media (max-width: 1640px) {
+  .home-page-about-image-paragraph {
+    height: auto;
+    margin: 40px 0;
+  }
 }
 
 @media (max-width: 1200px) {
@@ -309,4 +318,25 @@ body {
   text-align: center;
   font-size: 3rem;
   margin-top: 40px;
+}
+
+.home-product-show-more {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 40px;
+  font-size: 1.3rem;
+}
+
+.home-product-show-more-btn {
+  color: var(--accent-color);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: 0.5s;
+  margin: 5px 0;
+}
+
+.home-product-show-more-btn:hover {
+  border-bottom: 1px solid var(--accent-color);
 }

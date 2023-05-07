@@ -1,19 +1,24 @@
 import "./training.css";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Spinner from "../../components/spinner/spinner.js";
 
 const Training = () => {
   const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const getTrainings = async () => {
+    setIsLoading(true);
     try {
       const response = await axios.get(
         `${process.env.REACT_APP_API_URL}/api/training`
       );
+      setIsLoading(false);
       setData(response.data.items);
       console.log(response.data.items);
     } catch (e) {
       console.log(e);
+      setIsLoading(false);
     }
   };
 
@@ -28,9 +33,14 @@ const Training = () => {
           <h2>Trainings</h2>
         </div>
         <div className="training-cards">
+          {isLoading && (
+            <div>
+              <Spinner />
+            </div>
+          )}
           {data.map((training) => {
             return (
-              <div className="training-card">
+              <div className="training-card" key={training._id}>
                 <div className="training-card-img">
                   <img
                     src={`${process.env.REACT_APP_API_URL}/${training.image}`}

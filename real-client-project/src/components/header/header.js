@@ -168,6 +168,30 @@ const HeaderPage = (props) => {
               Contact
             </NavLink>
           </li>
+          <li>
+            <div className="link header-login">
+              Login
+              <div className="header-login-dropdown">
+                <NavLink
+                  className="link"
+                  to="/user-login"
+                  href="#hero"
+                  style={({ isActive }) => (isActive ? activeStyle : undefined)}
+                >
+                  User
+                </NavLink>
+                <hr />
+                <NavLink
+                  className="link"
+                  to="/admin-login"
+                  href="#hero"
+                  style={({ isActive }) => (isActive ? activeStyle : undefined)}
+                >
+                  Admin
+                </NavLink>
+              </div>
+            </div>
+          </li>
         </ul>
         <div className="center-space"></div>
         <div className="main-cart">
@@ -230,6 +254,26 @@ const HeaderPage = (props) => {
                 style={({ isActive }) => (isActive ? activeStyle : undefined)}
               >
                 Contact
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                className="link"
+                to="/user-login"
+                href="#hero"
+                style={({ isActive }) => (isActive ? activeStyle : undefined)}
+              >
+                Login as user
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                className="link"
+                to="/admin-login"
+                href="#hero"
+                style={({ isActive }) => (isActive ? activeStyle : undefined)}
+              >
+                Login as admin
               </NavLink>
             </li>
           </div>

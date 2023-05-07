@@ -1,15 +1,16 @@
 .training {
   width: 100%;
-  height: 100vh;
+  /* height: 100vh; */
 }
 
 .training-cards {
   width: 100%;
-  height: 100%;
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   gap: 40px;
-  padding-top: 40px;
+  padding-top: 80px;
+  padding-bottom: 140px;
 }
 
 .training-card {
@@ -26,6 +27,12 @@
 
 .training-card:hover {
   transform: translateY(-60px);
+  padding-bottom: 60px;
+}
+
+.training-card:hover img {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 }
 
 .training-card-img {
@@ -34,8 +41,8 @@
 }
 
 .training-card-img img {
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  border-radius: 10px;
+  transition: 0.5s;
 }
 
 .training-card-desc {
