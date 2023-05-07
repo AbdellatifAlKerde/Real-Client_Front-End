@@ -119,7 +119,7 @@ function DashboardProducts() {
     setIsLoading(true);
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/product?page=${page}&limit=${perPage}`
+        `${process.env.REACT_APP_API_URL}/api/product?limit=${25}`
       );
       console.log(response);
       setData(response.data.items);
@@ -134,7 +134,7 @@ function DashboardProducts() {
   useEffect(() => {
     getProducts();
     getCategories();
-  }, [page, perPage]);
+  }, []);
 
   const handleFormChange = (event) => {
     const value = event.target.value;
@@ -450,10 +450,10 @@ function DashboardProducts() {
           columns={columns}
           getRowId={getRowId}
           pagination
-          pageSize={perPage}
+          pageSize={25}
           rowCount={totalItems}
-          onPageChange={handlePageChange}
-          onPageSizeChange={handlePageSizeChange}
+          // onPageChange={handlePageChange}
+          // onPageSizeChange={handlePageSizeChange}
           rowSelection={false}
           loading={isLoading}
         />

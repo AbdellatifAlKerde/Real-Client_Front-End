@@ -148,10 +148,11 @@ function DashboardOrders() {
     setIsLoading(true);
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/order`
+        `${process.env.REACT_APP_API_URL}/api/order?limit=25`
       );
       console.log(response);
       setData(response.data.items);
+      setTotalItems(response.data.totalItems);
       setIsLoading(false);
     } catch (e) {
       console.log(e);
@@ -201,9 +202,9 @@ function DashboardOrders() {
           rows={data}
           columns={columns}
           getRowId={getRowId}
-          // pagination
-          // pageSize={perPage}
-          // rowCount={totalItems}
+          pagination
+          pageSize={25}
+          rowCount={totalItems}
           // onPageChange={handlePageChange}
           // onPageSizeChange={handlePageSizeChange}
           rowSelection={false}

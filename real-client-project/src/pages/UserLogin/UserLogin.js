@@ -128,6 +128,7 @@ const UserLoginPage = () => {
       } else {
         console.error(response.data.message);
       }
+      handleButtonClick();
     } catch (e) {
       console.log(e.message);
       setErrorMessage({ error: "Email or password is invalid" });
@@ -193,7 +194,6 @@ const UserLoginPage = () => {
                   name="Login"
                   style={{ padding: "15px 20px" }}
                   onClick={(e) => {
-                    handleButtonClick();
                     Login();
                     e.preventDefault();
                   }}

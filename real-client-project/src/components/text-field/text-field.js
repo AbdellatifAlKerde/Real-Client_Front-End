@@ -16,6 +16,8 @@ function TextField(props) {
         id={props.id}
         autoFocus={props.autoFocus}
         value={props.value}
+        disabled={props.disabled}
+        defaultValue={props.defaultValue}
       />
     </label>
   );

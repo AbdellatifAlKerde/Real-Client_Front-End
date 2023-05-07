@@ -274,3 +274,25 @@
   width: 100%;
   margin: 0;
 }
+
+.user-profile-popup-buttons {
+  display: flex;
+  margin-top: 20px;
+}
+
+.user-profile-popup-buttons div:last-child {
+  display: flex;
+  margin-left: auto;
+  gap: 20px;
+}
+
+.user-profile-popup-buttons div:first-child {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--accent-color);
+}
+
+.user-profile-popup-buttons button {
+  margin-left: auto;
+}

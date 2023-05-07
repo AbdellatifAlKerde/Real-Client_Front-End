@@ -10,8 +10,18 @@ import {
   FaAlignCenter,
 } from "react-icons/fa";
 import "../header/header.css";
+import Cookies from "js-cookie";
+import AccountRoundedIcon from "@mui/icons-material/AccountCircle";
+import LeaderboardRoundedIcon from "@mui/icons-material/LeaderboardRounded";
+import DashboardPopUp from "../DashboardPopUp/DashboardPopUp";
+import TextField from "../text-field/text-field";
+import MainButton from "../button/button";
+import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 
 const HeaderPage = (props) => {
+  const isUserAuthenticated = Cookies.get("user-token");
+  const isAdminAuthenticated = Cookies.get("admin-token");
+
   const [open, setOpen] = useState(false);
   const [findProducts, setFindProducts] = useState(false);
   const [allProducts, setAllProducts] = useState([]);
@@ -19,6 +29,19 @@ const HeaderPage = (props) => {
   const [dataAllProducts, setDataAllProducts] = useState([]);
   const [inputValue, setInputValue] = useState("");
   const [isScrolled, setIsScrolled] = useState(false);
+  const [userProfile, setUserProfile] = useState(false);
+  const [userProfileData, setUserProfileData] = useState([]);
+  const [userEditProfileData, setUserEditProfileData] = useState(false);
+  const [editUserData, setEditUserData] = useState({
+    fullName: "",
+    address: "",
+    phoneNumber: "",
+    email: "",
+    password: "",
+  });
+  const [errorMessage, setErrorMessage] = useState("");
+  const [displayError, setDisplayError] = useState(false);
+  // const [userProfileId, setUserProfileId] = useState("");
 
   let activeStyle = {
     borderBottom: "3px solid var(--accent-color)",
@@ -87,8 +110,6 @@ const HeaderPage = (props) => {
     setDataAllProducts(allProducts);
   };
 
-  console.log(dataAllProducts);
-
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
@@ -102,6 +123,51 @@ const HeaderPage = (props) => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const UserProfileId = Cookies.get("user-id");
+
+  const getUserProfileData = async (id) => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_API_URL}/api/user/${id}`
+      );
+      setUserProfileData(response.data.user);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const handleEditChange = (event) => {
+    const value = event.target.value;
+    setEditUserData({ ...editUserData, [event.target.name]: value });
+  };
+
+  const editUserProfileData = async (e) => {
+    e.preventDefault();
+    const editUserProfileDataForm = {
+      fullName: editUserData.fullName,
+      address: editUserData.address,
+      phoneNumber: editUserData.phoneNumber,
+      email: editUserData.email,
+      password: editUserData.password,
+    };
+    try {
+      const response = await axios.patch(
+        `${process.env.REACT_APP_API_URL}/api/user/${UserProfileId}`,
+        editUserProfileDataForm
+      );
+      console.log(response);
+      setUserEditProfileData(false);
+      getUserProfileData(UserProfileId);
+    } catch (e) {
+      console.log(e);
+      if (e.response.status == 409) {
+        setDisplayError(true);
+        setErrorMessage(e.response.data);
+      } else {
+      }
+    }
+  };
 
   return (
     <div className={`holl-header ${isScrolled ? "shadow" : ""}`}>
@@ -172,23 +238,73 @@ const HeaderPage = (props) => {
             <div className="link header-login">
               Login
               <div className="header-login-dropdown">
-                <NavLink
-                  className="link"
-                  to="/user-login"
-                  href="#hero"
-                  style={({ isActive }) => (isActive ? activeStyle : undefined)}
-                >
-                  User
-                </NavLink>
+                {!isUserAuthenticated ? (
+                  <NavLink
+                    className="link"
+                    to="/user-login"
+                    href="#hero"
+                    style={({ isActive }) =>
+                      isActive ? activeStyle : undefined
+                    }
+                  >
+                    User
+                  </NavLink>
+                ) : (
+                  <NavLink
+                    // to="user-profile"
+                    onClick={() => {
+                      setUserProfile(true);
+                      getUserProfileData(UserProfileId);
+                    }}
+                    className="link"
+                    style={({ isActive }) =>
+                      isActive ? activeStyle : undefined
+                    }
+                  >
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "5px",
+                      }}
+                    >
+                      <AccountRoundedIcon />
+                      Profile
+                    </div>
+                  </NavLink>
+                )}
                 <hr />
-                <NavLink
-                  className="link"
-                  to="/admin-login"
-                  href="#hero"
-                  style={({ isActive }) => (isActive ? activeStyle : undefined)}
-                >
-                  Admin
-                </NavLink>
+                {!isAdminAuthenticated ? (
+                  <NavLink
+                    className="link"
+                    to="/admin-login"
+                    href="#hero"
+                    style={({ isActive }) =>
+                      isActive ? activeStyle : undefined
+                    }
+                  >
+                    Admin
+                  </NavLink>
+                ) : (
+                  <NavLink
+                    to="/dashboard"
+                    className="link"
+                    style={({ isActive }) =>
+                      isActive ? activeStyle : undefined
+                    }
+                  >
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: "5px",
+                      }}
+                    >
+                      <LeaderboardRoundedIcon />
+                      Dashboard
+                    </div>
+                  </NavLink>
+                )}
               </div>
             </div>
           </li>
@@ -256,30 +372,203 @@ const HeaderPage = (props) => {
                 Contact
               </NavLink>
             </li>
-            <li>
-              <NavLink
-                className="link"
-                to="/user-login"
-                href="#hero"
-                style={({ isActive }) => (isActive ? activeStyle : undefined)}
-              >
-                Login as user
-              </NavLink>
+            <li style={{ padding: 0 }}>
+              {!isUserAuthenticated ? (
+                <NavLink
+                  className="link"
+                  to="/user-login"
+                  href="#hero"
+                  style={({ isActive }) => (isActive ? activeStyle : undefined)}
+                >
+                  User
+                </NavLink>
+              ) : (
+                <NavLink
+                  onClick={() => {
+                    setUserProfile(true);
+                    getUserProfileData(UserProfileId);
+                  }}
+                  className="link"
+                  style={({ isActive }) => (isActive ? activeStyle : undefined)}
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "5px",
+                    }}
+                  >
+                    <AccountRoundedIcon />
+                    Profile
+                  </div>
+                </NavLink>
+              )}
             </li>
-            <li>
-              <NavLink
-                className="link"
-                to="/admin-login"
-                href="#hero"
-                style={({ isActive }) => (isActive ? activeStyle : undefined)}
-              >
-                Login as admin
-              </NavLink>
+            <li style={{ padding: 0 }}>
+              {!isAdminAuthenticated ? (
+                <NavLink
+                  className="link"
+                  to="/admin-login"
+                  href="#hero"
+                  style={({ isActive }) => (isActive ? activeStyle : undefined)}
+                >
+                  Login as admin
+                </NavLink>
+              ) : (
+                <NavLink
+                  to="/dashboard"
+                  className="link"
+                  style={({ isActive }) => (isActive ? activeStyle : undefined)}
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "5px",
+                    }}
+                  >
+                    <LeaderboardRoundedIcon />
+                    Dashboard
+                  </div>
+                </NavLink>
+              )}
             </li>
           </div>
         ) : null}
         <div className="right-space"></div>
       </div>
+      {userProfile && (
+        <DashboardPopUp
+          onClick={() => {
+            setUserProfile(false);
+            setUserEditProfileData(false);
+          }}
+          title="User Profile"
+          onSubmit={editUserProfileData}
+        >
+          {displayError && (
+            <div
+              onClick={() => setDisplayError(false)}
+              style={{ color: "var(--accent-color)" }}
+            >
+              {errorMessage}
+            </div>
+          )}
+          <TextField
+            label="Full Name"
+            type="text"
+            name="fullName"
+            style={{
+              width: "100%",
+              fontSize: "16px",
+              border: "none",
+              boxShadow: "0 1px 2px #999",
+            }}
+            placeholder={userProfileData.fullName}
+            disabled={userEditProfileData ? false : true}
+            onChange={handleEditChange}
+            defaultValue={userProfileData.fullName}
+          />
+          <TextField
+            label="Address"
+            type="text"
+            name="address"
+            style={{
+              width: "100%",
+              fontSize: "16px",
+              border: "none",
+              boxShadow: "0 1px 2px #999",
+            }}
+            placeholder={userProfileData.address}
+            disabled={userEditProfileData ? false : true}
+            onChange={handleEditChange}
+            defaultValue={userProfileData.address}
+          />
+          <TextField
+            label="Phone"
+            type="text"
+            name="phoneNumber"
+            style={{
+              width: "100%",
+              fontSize: "16px",
+              border: "none",
+              boxShadow: "0 1px 2px #999",
+            }}
+            placeholder={userProfileData.phoneNumber}
+            disabled={userEditProfileData ? false : true}
+            onChange={handleEditChange}
+            defaultValue={userProfileData.phoneNumber}
+          />
+
+          <TextField
+            label="Email"
+            type="email"
+            name="email"
+            style={{
+              width: "100%",
+              fontSize: "16px",
+              border: "none",
+              boxShadow: "0 1px 2px #999",
+            }}
+            placeholder={userProfileData.email}
+            disabled={userEditProfileData ? false : true}
+            onChange={handleEditChange}
+            defaultValue={userProfileData.email}
+          />
+
+          <TextField
+            label="Password"
+            type="password"
+            name="password"
+            style={{
+              width: "100%",
+              fontSize: "16px",
+              border: "none",
+              boxShadow: "0 1px 2px #999",
+            }}
+            placeholder="**********"
+            disabled={userEditProfileData ? false : true}
+            onChange={handleEditChange}
+            defaultValue={userProfileData.password}
+          />
+          {userEditProfileData ? (
+            <div className="user-profile-popup-buttons">
+              <div>
+                <MainButton
+                  name="Cancel"
+                  style={{
+                    backgroundColor: "#fff",
+                    color: "#222",
+                    border: "1px solid #222",
+                  }}
+                  onClick={(e) => {
+                    setUserEditProfileData(false);
+                  }}
+                />
+                <MainButton type="submit" name="Apply Changes" />
+              </div>
+            </div>
+          ) : (
+            <div className="user-profile-popup-buttons">
+              <div
+                onClick={() => {
+                  Cookies.remove("user-token");
+                  Cookies.remove("user-id");
+                  setUserProfile(false);
+                }}
+              >
+                <LogoutRoundedIcon />
+              </div>
+              <button
+                onClick={() => setUserEditProfileData(true)}
+                className="main-button"
+              >
+                Edit Profile
+              </button>
+            </div>
+          )}
+        </DashboardPopUp>
+      )}
     </div>
   );
 };
