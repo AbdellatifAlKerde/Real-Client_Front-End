@@ -56,7 +56,7 @@ const HeaderPage = (props) => {
 
   //// fetching the all products
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_API_URL}product`).then((response) => {
+    axios.get(`${process.env.REACT_APP_API_URL}/api/product`).then((response) => {
       setAllProducts(response.data);
       setTotalPages(response.data.totalPages);
     });
@@ -69,7 +69,7 @@ const HeaderPage = (props) => {
     for (let i = 1; i <= totalPages; i++) {
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_API_URL}product?page=${i}`
+          `${process.env.REACT_APP_API_URL}/api/product?page=${i}`
         );
         if (response.status === 200) {
           const data = response.data.items;

@@ -8,7 +8,7 @@ const ShowProduct = (props) => {
 
   
 useEffect(() => {
-axios.get(`${process.env.REACT_APP_API_URL}product/${props.id}`)
+axios.get(`${process.env.REACT_APP_API_URL}/api/product/${props.id}`)
 .then((response) => {
   setDataProduct(response.data);
   setCategoryname(response.data.category[0].name)

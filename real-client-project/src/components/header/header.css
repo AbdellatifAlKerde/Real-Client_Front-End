@@ -189,6 +189,12 @@
     display: none;
   }
 
+
+.icon-search {
+  display: none;
+}
+
+
   .dropdown_menu {
     display: flex;
   }
@@ -230,6 +236,14 @@
   -webkit-box-shadow: 0 4px 12px -6px #444;
   -moz-box-shadow: 0 4px 12px -6px #444;
   box-shadow: 0 4px 12px -6px #444;
+}
+
+.list li {
+  margin-left: -20px;
+}
+
+.icon-search {
+  color: rgb(158 ,62,62 );
 }
 
 .header-login {

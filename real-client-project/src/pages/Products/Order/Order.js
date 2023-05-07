@@ -4,6 +4,8 @@ import CardOrder from "./CardOrder/CardOrder";
 import { FaRegTimesCircle } from "react-icons/fa";
 import Header from "../../../components/header/header";
 import Footer from "../../../components/footer/footer";
+import {NavLink} from "react-router-dom";
+import cookies  from "js-cookie";
 import "./Order.css";
 const Order = () => {
   const [cartProducts, setCartProducts] = useState([]);
@@ -11,13 +13,24 @@ const Order = () => {
   const [productsOrder, setProductsOrder] = useState([]);
   const [stringOrder, setStringOrder] = useState("");
   const [fakeData, setFakeData] = useState([]);
+  const [isLoged , setIsLoged] = useState(false);
+
+
+  // useEffect(() => {
+  //   // Call the removeCookie function to delete a cookie by name
+  //   cookies.remove("user-id");
+  // }, []);
 
   useEffect(() => {
-    setStringOrder(localStorage.products);
+    if(localStorage.products !== undefined) {
+      setStringOrder(localStorage.products);
+    }
   }, []);
 
   useEffect(() => {
+    if(stringOrder !== ""){
     setProductsOrder(stringOrder.split(","));
+    }
   }, [stringOrder]);
 
   useEffect(() => {
@@ -26,7 +39,7 @@ const Order = () => {
       for (let i = 0; i < productsOrder.length; i++) {
         try {
           const response = await axios.get(
-            `${process.env.REACT_APP_API_URL}product/${productsOrder[i]}`
+            `${process.env.REACT_APP_API_URL}/api/product/${productsOrder[i]}`
           );
           addProducts.push(response.data);
         } catch (error) {
@@ -49,22 +62,41 @@ const Order = () => {
     localStorage.setItem("products", productsOrder);
     setTriggerFetchData(true);
   };
+  const idUser = cookies.get("user-id")
 
-  // const addOrder = async() => {
-  //   try{
-  //     const user = "id_user";
-  //     const products =["products"];
+  const addOrder = async() => {
+    try{
+      const user = idUser;
+      const products = productsOrder;
 
-  //     const response = await axios.post(`${process.env.REACT_APP_API_URL}order`, {
-  //       user,
-  //       products
-  //     })
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/order`,
+       {user,products},
+            {
+        headers: {
+          Authorization: `Bearer ${cookies.get("user-token")}`,
+        },
+      })
+      console.log(response);
+    if(response.status === 201){
+      window.alert("your order match successfuly")
+      localStorage.removeItem("products");
+      setProductsOrder([])
+    }
 
-  //   }catch(error){
-  //     console.error(error.message);
-  //   }
+    }catch(error){
+      console.error(error.message);
+    }
+  }
 
-  // }
+    const handleCheckIfLogedin = () => {
+      if (productsOrder.length > 0){
+        if (idUser) {
+          addOrder();
+        } else {
+          setIsLoged(true);
+        }
+      }
+    };
 
   return (
     <div>
@@ -80,10 +112,20 @@ const Order = () => {
             />
           ))}
           <div className="div-confirme">
-            <div className="confirme">Confirm</div>
+            <div className="confirme" onClick={handleCheckIfLogedin}>
+              Confirm
+            </div>
+            {isLoged ? (
+                 <NavLink className="link" to="/user-login" href="#hero">
+                <p>please login first</p>
+              </NavLink>
+            ) : (
+           ""
+            )}
           </div>
         </div>
       </div>
+      
     </div>
   );
 };
