@@ -30,10 +30,16 @@ function App() {
   const isDashboardPath = location.pathname.startsWith("/dashboard");
   const isNotFoundPath = location.pathname === "*";
   const isUnauthorizedPath = location.pathname === "/unauthorized";
+  const isAdminLoginPath = location.pathname === "/admin-login";
+  const isUserLoginPath = location.pathname === "/user-login";
 
   // Don't render the header in Dashboard, Unauthorized, and NotFound pages
   const shouldRenderHeader =
-    !isDashboardPath && !isNotFoundPath && !isUnauthorizedPath;
+    !isDashboardPath &&
+    !isNotFoundPath &&
+    !isUnauthorizedPath &&
+    !isAdminLoginPath &&
+    !isUserLoginPath;
 
   useEffect(() => {
     // Simulate a delay in loading the page

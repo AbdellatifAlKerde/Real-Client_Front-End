@@ -2,11 +2,17 @@ import React from "react";
 import "./Home.css";
 import image from "../../images/image18.png";
 import { Link } from "react-router-dom";
+import ArrowRightAltRoundedIcon from "@mui/icons-material/ArrowRightAltRounded";
 
 function Training() {
   return (
     <div className="home-page-training">
       <h2 className="training-heading">Trainings</h2>
+      <div className="home-product-show-more">
+        <Link to="/training" className="home-product-show-more-btn">
+          Show More <ArrowRightAltRoundedIcon />
+        </Link>
+      </div>
 
       <div className="training-container">
         <div className="training-text">

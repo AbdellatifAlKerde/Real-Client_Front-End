@@ -1,5 +1,4 @@
 .holl-header {
-
   top: 0;
   position: fixed;
   width: 100%;
@@ -31,7 +30,6 @@
 }
 .search-bare:focus {
   outline: none;
-
 }
 
 .header-logo {
@@ -49,8 +47,6 @@
   margin-left: -3rem;
 }
 
-
-
 .link {
   text-decoration: none;
   padding: 2px;
@@ -59,7 +55,6 @@
   font-weight: bold;
   color: rgb(167, 81, 81);
   margin-right: 60px;
-
 }
 
 .link:hover {
@@ -88,8 +83,6 @@
 }
 
 .main-cart {
-
-
   width: 2rem;
   position: relative;
 }
@@ -161,7 +154,6 @@
   display: none;
 }
 
-
 .dropdown_menu li {
   padding: 20px;
   list-style-type: none;
@@ -195,12 +187,13 @@
   .right-space,
   .left-space {
     display: none;
-
   }
+
 
 .icon-search {
   display: none;
 }
+
 
   .dropdown_menu {
     display: flex;
@@ -208,7 +201,6 @@
 
   .list {
     display: none;
-
   }
   .wrapp {
     justify-content: space-between;
@@ -252,4 +244,47 @@
 
 .icon-search {
   color: rgb(158 ,62,62 );
+}
+
+.header-login {
+  position: relative;
+  padding: 32px 0;
+}
+
+.header-login:hover .header-login-dropdown {
+  display: flex;
+}
+
+.header-login-dropdown:hover {
+  display: flex;
+}
+
+.header-login-dropdown {
+  position: absolute;
+  top: 88px;
+  left: 0;
+  display: none;
+  flex-direction: column;
+  background-color: var(--secondary-color);
+  padding: 10px;
+  gap: 10px;
+  box-shadow: 0 2px 10px #999;
+  animation: login-header-drop-down 0.5s ease;
+}
+
+@keyframes login-header-drop-down {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.header-login-dropdown .link {
+  width: 100%;
+  margin: 0;
 }
