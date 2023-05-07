@@ -19,6 +19,11 @@ const Products = () => {
   const [idProductShowed, setIdProductShowed] = useState();
   const [isMounted, setIsMounted] = useState(false);
 
+  // let activeStyle ={
+  //     color: "rgb(158, 62, 62)",
+  //     backgroundColor: "white"
+  // }
+
   useEffect(() => {
     setIsMounted(true);
   }, []);
@@ -156,7 +161,10 @@ const Products = () => {
       {!showProduct ? (
         <div className="product-container">
           <div className="categories-container">
-            <h3 className="category-item" onClick={() => HandleAllCategory()}>
+            <h3
+              className="category-item"
+              onClick={() => HandleAllCategory()}
+            >
               All category
             </h3>
             {categories.map((element) => (

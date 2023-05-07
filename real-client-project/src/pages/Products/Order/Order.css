@@ -36,6 +36,10 @@
  width: 100%;
  display: flex;
  justify-content: end;
+ align-items: center;
+}
+.div-confirme p{
+    margin-top: 20%;
 }
 .confirme {
     background: linear-gradient(135deg, #fef1fe ,rgb(158, 62, 62) 30%  );
