@@ -9,6 +9,8 @@ import Training from "./training.js";
 import About from "./about.js";
 import Card from "../Products/Card/Card";
 import axios from "axios";
+import { Link } from "react-router-dom";
+import ArrowRightAltRoundedIcon from "@mui/icons-material/ArrowRightAltRounded";
 
 function HomePage() {
   const [productData, setProductData] = useState([]);
@@ -107,38 +109,28 @@ function HomePage() {
       <div className="home__content">
         <About />
         <div
-          style={{ background: "var(--secondary-color)", padding: "40px 0" }}
+          style={{
+            background: "var(--secondary-color)",
+            padding: "40px 0",
+            display: "flex",
+            flexDirection: "column",
+          }}
         >
           <div className="home-page-product-section-heading">
             <h2>Products</h2>
           </div>
-          <Carousel
-            responsive={{
-              desktop: {
-                breakpoint: { max: 4000, min: 1024 },
-                items: 3,
-                slidesToSlide: 1,
-                paritialVisibilityGutter: 40,
-              },
-
-              tablet: {
-                breakpoint: { max: 1024, min: 464 },
-                items: 1,
-                slidesToSlide: 1,
-                partialVisibilityGutter: 30,
-              },
-              mobile: {
-                breakpoint: { max: 464, min: 0 },
-                items: 1,
-                slidesToSlide: 1,
-                partialVisibilityGutter: 30,
-              },
+          <div className="home-product-show-more">
+            <Link to="/products" className="home-product-show-more-btn">
+              Show More <ArrowRightAltRoundedIcon />
+            </Link>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              flexWrap: "wrap",
+              columnGap: "80px",
             }}
-            containerClass="carousel-container"
-            itemClass="carousel-item"
-            infinite={true}
-            autoPlay={true}
-            autoPlaySpeed={3000}
           >
             {productData.map((product) => (
               <Card
@@ -146,10 +138,10 @@ function HomePage() {
                 image={`${process.env.REACT_APP_API_URL}${product.image}`}
                 name={product.name}
                 price={product.price}
-                style={{ width: "500px", marginLeft: "78px" }}
+                style={{ width: "500px" }}
               />
             ))}
-          </Carousel>
+          </div>
         </div>
 
         <Training />

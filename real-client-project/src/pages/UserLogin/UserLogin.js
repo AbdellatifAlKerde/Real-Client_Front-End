@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import TextField from "../../components/text-field/text-field";
 import MainButton from "../../components/button/button";
 import "./UserLogin.css";
@@ -7,6 +8,11 @@ import axios from "axios";
 import Spinner from "../../components/spinner/spinner";
 import Cookies from "js-cookie";
 const UserLoginPage = () => {
+  const navigate = useNavigate();
+  const handleButtonClick = () => {
+    navigate(-1);
+  };
+
   const [signup, setSignup] = useState(false);
   const [userSignup, setUserSignup] = useState({
     fullName: "",
@@ -187,6 +193,7 @@ const UserLoginPage = () => {
                   name="Login"
                   style={{ padding: "15px 20px" }}
                   onClick={(e) => {
+                    handleButtonClick();
                     Login();
                     e.preventDefault();
                   }}
