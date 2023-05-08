@@ -51,6 +51,7 @@ const handleRemoveProduct = (element) => {
   setTriggerFetchData(true);
 }
 
+
 // const addOrder = async() => {
 //   try{
 //     const user = "id_user";
